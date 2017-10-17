@@ -1,0 +1,247 @@
+<!DOCTYPE>
+<head>
+<title> Homework 1 </title>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="container">
+<h2>Homework 1: </h2> <small>Art of Earth</small>
+
+    <p>We were tasked to create a Git Hub repository. I used the official software via a Git Bash shell. After doing so I set up a local repository on my laptop to work from. I created my first README file as well, though it didn't say much more than it was for the class.</p>
+    
+    <img src="images/wtf.png"/>
+    
+    <p>Things do not go according to plan as we see above. I end up with a lot of errors about the history even though I'm only working from one machine. In an attempt to circumvent the issue for now, I do direct uploads to the Git Hub page instead. That works just fine.</p>
+
+    <h2>The Site</h2>
+
+    <p>We have to create a multi-page website that incorperates the following elements: Bootstrap, a List (Ordered, Unordered and Description List), a Table, CSS files, a Nav Bar, and consistent style. We were also not allowed to use major wigwams so I opted for the permitted choice of Brackets.</p>
+    
+    <p>The site I designed is called Art of Earth and is made for a fictional small company that creates crystal trees. The pages include an Index, an About, the Shamanic Tools, the Custom Make and a Contact page. There is also three different CSSs (that are not Boostrap) - one for general cohesion formatting, another for certain page specfic elements that weren't needed across the site and another for print readiness. There is also some Javascript for an image gallery on one of the pages.</p>
+
+    <h2>Syntax Highlights</h2>
+    
+    <h4>Nav Bar</h4>
+    <strong>HTML</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;banner&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;p</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;nav&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;index_aoe.html&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;homeLink&quot;</span><span style="color: #007700">&gt;</span>Home <span style="color: #880000; font-weight: bold">&amp;#8226;</span><span style="color: #007700">&lt;/a&gt;</span> 
+        <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;about_aoe.html&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;aboutLink&quot;</span><span style="color: #007700">&gt;</span>About Art of the Earth <span style="color: #880000; font-weight: bold">&amp;#8226;</span> <span style="color: #007700">&lt;/a&gt;</span> 
+        <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;customMake_aoe.html&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;customLink&quot;</span><span style="color: #007700">&gt;</span>Custom Make <span style="color: #880000; font-weight: bold">&amp;#8226;</span> <span style="color: #007700">&lt;/a&gt;</span> 
+        <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;shamanicTools_aoe.html&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;toolsLink&quot;</span><span style="color: #007700">&gt;</span>Shamanic Tools <span style="color: #880000; font-weight: bold">&amp;#8226;</span><span style="color: #007700">&lt;/a&gt;</span> 
+        <span style="color: #007700">&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;contact_aoe.html&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;contactLink&quot;</span><span style="color: #007700">&gt;</span>Contact Us<span style="color: #007700">&lt;/a&gt;</span>
+    <span style="color: #007700">&lt;/p&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+</pre></td></tr></table></div>
+
+    <strong>CSS</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td><pre style="margin: 0; line-height: 125%">div#banner {
+                background-color: #fbf5ef;
+                padding-top: 60px;
+                padding-bottom: 100px;
+                background-image:url(images/Banner.png);
+                background-repeat:no-repeat;
+                background-position:25% 10%;
+                margin: 0 30px 0 30px;
+                width:800px;
+                }
+#nav {
+                color: #fbf5ef;
+                text-align: right;
+                font-size: 12px;
+                margin-top: 50px;
+                padding: 0 0 0 0;
+                width:790px;
+}
+</pre></td></tr></table></div>
+
+    <strong>Ordered List</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;ol&gt;</span>
+            <span style="color: #007700">&lt;li&gt;</span>Please no recruiters or soliscitations!<span style="color: #007700">&lt;/li&gt;</span>
+            <span style="color: #007700">&lt;li&gt;</span>Those looking for 24 hour assistance may also use our Question form below which is delivered 
+            directly to the company&#39;s customer support advisor who will see to your needs as promptly as possible.<span style="color: #007700">&lt;/li&gt;</span>
+                    <span style="color: #007700">&lt;li&gt;</span>Original peices may take up to a month to craft, please keep that in mind when placing orders.<span style="color: #007700">&lt;/li&gt;</span>
+<span style="color: #007700">&lt;/ol&gt;</span>
+</pre></td></tr></table></div>
+
+    
+    <strong>Unordered List</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7</pre></td><td><pre style="margin: 0; line-height: 125%">    <span style="color: #007700">&lt;ul&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>All stones are 100% natural.<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>All leather is 100% geniune.<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>Crystal tree leaves are NOT glued on and therefore will not fall off.<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>if you are not satisfied you may return your product within 30 days for a full refund.<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;&lt;/li&gt;</span>
+<span style="color: #007700">&lt;/ul&gt;&lt;br&gt;</span>
+</pre></td></tr></table></div>
+
+    
+    <strong>Descriptive List</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;dl&gt;</span>
+                <span style="color: #007700">&lt;dt&gt;&lt;p&gt;&lt;strong&gt;</span>THANK YOU SO MUCH!<span style="color: #007700">&lt;/strong&gt;&lt;/p&gt;&lt;/dt&gt;</span>
+                <span style="color: #007700">&lt;dd&gt;&lt;p&gt;&lt;em&gt;</span>Ember Johnson<span style="color: #007700">&lt;/em&gt;&lt;/p&gt;&lt;/dd&gt;</span>
+                <span style="color: #007700">&lt;dd&gt;&lt;p&gt;</span><span style="color: #880000; font-weight: bold">&amp;#8224;&amp;#8224;&amp;#8224;&amp;#8224;</span> [June 1rst 2013]<span style="color: #007700">&lt;/p&gt;&lt;/dd&gt;</span>
+                <span style="color: #007700">&lt;dd&gt;&lt;p&gt;&lt;em&gt;</span>Robin created a fantastic dreamcatcher for me and I haven&#39;t slept this well 
+                in years! What&#39;s more she even offered to teach me to design my own!<span style="color: #007700">&lt;/em&gt;&lt;/p&gt;&lt;/dd&gt;</span>
+                <span style="color: #007700">&lt;dd&gt;</span><span style="color: #880000; font-weight: bold">&amp;nbsp;</span><span style="color: #007700">&lt;/dd&gt;</span>
+<span style="color: #007700">&lt;/dl&gt;</span>
+</pre></td></tr></table></div>
+
+    <strong>Table</strong>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;table</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;customTable&quot;</span> <span style="color: #0000CC">width=</span><span style="background-color: #fff0f0">&quot;70%&quot;</span> <span style="color: #0000CC">border=</span><span style="background-color: #fff0f0">&quot;0&quot;</span> <span style="color: #0000CC">cellspacing=</span><span style="background-color: #fff0f0">&quot;1&quot;</span> <span style="color: #0000CC">cellpadding=</span><span style="background-color: #fff0f0">&quot;3&quot;</span><span style="color: #007700">&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td</span> <span style="color: #0000CC">colspan=</span><span style="background-color: #fff0f0">&quot;2&quot;</span><span style="color: #007700">&gt;&lt;strong&gt;</span>Stones<span style="color: #007700">&lt;/strong&gt;&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td</span> <span style="color: #0000CC">colspan=</span><span style="background-color: #fff0f0">&quot;2&quot;</span><span style="color: #007700">&gt;&lt;strong&gt;</span>Wire<span style="color: #007700">&lt;/strong&gt;&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td</span> <span style="color: #0000CC">colspan=</span><span style="background-color: #fff0f0">&quot;2&quot;</span><span style="color: #007700">&gt;&lt;strong&gt;</span>Design<span style="color: #007700">&lt;/strong&gt;&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td</span> <span style="color: #0000CC">colspan=</span><span style="background-color: #fff0f0">&quot;2&quot;</span><span style="color: #007700">&gt;&lt;strong&gt;</span>Special<span style="color: #007700">&lt;/strong&gt;&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Garnet<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$10<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Copper<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$2<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Crystal Tree<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$20<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Etching<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$15<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Peridot<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$15<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Steel (Blue)<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$2<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Necklace<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$15<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Rare Gems<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>+$15<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Agate<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$10<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Steel<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$5<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Bracelet<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$10<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Full Jewlery Set<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>+$15<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Haylite<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$5<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Bronze<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$10<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Earrings<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$5<span style="color: #007700">&lt;/td&gt;</span>
+           <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Leopolite<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$10<span style="color: #007700">&lt;/td&gt;</span>
+          <span style="color: #007700">&lt;/tr&gt;</span>
+          <span style="color: #007700">&lt;tr&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>Rose Quartz<span style="color: #007700">&lt;/td&gt;</span>
+            <span style="color: #007700">&lt;td&gt;</span>$5<span style="color: #007700">&lt;/td&gt;</span>
+          <span style="color: #007700">&lt;/tr&gt;</span>
+        <span style="color: #007700">&lt;/table&gt;</span>
+</pre></td></tr></table></div>
+
+
+    
+</div>
+</body>
