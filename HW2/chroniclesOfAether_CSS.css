@@ -1,0 +1,431 @@
+@charset "utf-8";
+/* CSS Document */
+ 
+
+/* common colors
+
+Golden: #CC9933 \ rgb(204, 153, 51)
+Dark Golden: rgb(160, 107, 14)
+Sky light Blue: rgb(186, 207, 221)
+Rich Sky Blue: rgb(0, 156, 212)
+Dark Blue: rgb(0, 0, 153)
+
+*/
+
+/* -- WRAPPER AND CONTAINER -- */
+
+
+#wrapper {
+	max-width:1024px;
+	font-size: 0.6875em;
+	margin: 0px auto;
+  }
+  
+  .container {
+	width:800px;
+	margin: 20px auto;
+	background-repeat:repeat-y;
+	border-radius: 25px;
+}
+
+.content {
+	margin:0px 25px;
+}
+
+body {
+	background-image:url(images/bgColor.jpg);
+}
+
+/* ----  BACK TO TOP --- */
+
+.back2top {
+	text-align:right;
+	font-size:26px;
+	clear:both; 
+	color:rgb(0, 156, 212);
+}
+
+.back2top2 {
+	text-align:right;
+	font-size:26px;
+	color:rgb(0, 156, 212);
+	width:30px;
+	float: right;
+}
+
+
+/* ----- TEXT AND TABLES ----- */
+
+
+td,th {
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	font-size: 13px;
+	color: #666;
+	font-style: normal;	
+}
+
+.pageHead {
+	font-family:"Berkshire Swash";
+	font-size:40px;
+	text-align:center;
+	color: rgb(14, 0, 153);
+	clear:none;
+	text-shadow:
+    2px 2px 0 rgb(204, 153, 51),
+    /* Simulated effect for Firefox and Opera and nice enhancement for WebKit */
+   -1px -1px 0 rgb(204, 153, 51),  
+    1px -1px 0 rgb(204, 153, 51),
+   -1px  1px 0 rgb(204, 153, 51),
+    1px  1px 0 rgb(204, 153, 51);
+	margin-bottom:15px;
+	background-image:url(images/CoA_HRline.png);
+	background-repeat:no-repeat;
+	margin: 10px 25px 10px 25px;
+	height:50px;
+}
+
+H3 {
+	font-family:"Berkshire Swash";
+	font-size:22px;
+	color:#CC9933;
+}
+
+/* --  LINKS -- */
+
+a:link {
+	color: rgb(0, 156, 212);
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: rgb(0, 0, 153);
+}
+a:hover {
+	text-decoration: none;
+	color: rgb(160, 107, 14);
+}
+a:active {
+	text-decoration: none;
+	color: rgb(0, 156, 212);
+}
+
+/* ------ BANNER------ */
+
+.banner {
+	height:96px;
+	background-image:url(images/banner_top.png);
+	background-repeat:no-repeat;
+}
+
+/* ----- COLUMNS & ASIDES----- */
+
+.Col1 {
+	width:425px;
+	float:left;
+	clear:none;
+	font-size: 13px;
+}
+
+.Col2 {
+	width:300px;
+	float:right;
+	clear:both;
+	font-size: 13px;
+	}
+	
+.colLeft {
+	width:320px; 
+	float: left; 
+	clear:none; 
+	padding:10px; 
+	text-align:center;
+	font-size: 13px;
+}
+.colRight {
+	width:320px; 
+	float: right; 
+	clear:none; 
+	padding:10px; 
+	text-align:center;
+	font-size: 13px;
+}
+
+
+.twoUp { /*---- four up column -- Color in DIV tag No Section2 ----*/
+	width:325px;
+	float:left;
+	margin: 8px 15px;
+	padding: 10px;
+	border-radius: 10px;
+	color:#FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.twoUp_2 { /*---- four up column -- Color in DIV tag Yes Section2 ----*/
+	width:325px;
+	float:left;
+	margin: 8px 15px;
+	padding: 10px;
+	border-radius: 10px;
+	color:#FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.threeUp { /*---- three up column -- Color in DIV tag No Section2 ----*/
+	padding: 10px;
+	width: 200px;
+	float: left;
+	clear: none;
+	margin: 8px 15px;
+	border-radius: 10px;
+	color: #FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.threeUp_2 { /*---- four up column -- Color in DIV tag Yes Section2 ----*/
+	padding: 10px;
+	width: 184px;
+	float: left;
+	clear: none;
+	margin: 8px 15px;
+	border-radius: 10px;
+	color: #FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.fourUp { /*---- four up column -- Color in DIV tag No Section2 ----*/
+	width:145px;
+	float:left;
+	margin: 8px 5px 8px 15px;
+	padding: 10px;
+	border-radius: 10px;
+	color:#FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.fourUp_2 { /*---- four up column -- Color in DIV tag Yes Section2 ----*/
+	width:300px;
+	float:left;
+	margin: 8px 15px;
+	padding: 10px;
+	border-radius: 10px;
+	color:#FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.elementalInfo {
+	padding: 10px;
+	width: 200px;
+	height: 250px;
+	overflow: hidden;
+	float: left;
+	clear: none;
+	margin: 8px 15px;
+	border-radius: 10px;
+	color: #FFF;
+	-webkit-transition: all 10s ease 4s;
+	-o-transition: all 10s ease 4s;
+	transition: all 0s ease 4s;
+	font-size: 13px;
+}
+
+.elementalInfo:hover {
+	height:auto;
+}
+
+.speciesEHS {	/*-- The Eyes Hair Skin for the speices pages --*/
+	padding: 10px;
+	width: 200px;
+	height: 230px;
+	float: left;
+	clear: none;
+	margin: 8px 15px;
+	border-radius: 10px;
+	color: #FFF;
+	background-color:rgba(0, 156, 212, 0.5);
+	font-size: 13px;
+}
+
+.sideCol {
+	margin: 0px 20px;
+	float:right;
+	font-size: 13px;
+}
+
+.sideCol_BG_Top {
+	width:300px;
+	float:right;
+	clear:none;
+	background-image:url(images/sideArticle_top.png);
+	background-repeat:no-repeat;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+.sideCol_BG_Middle {
+	width:300px;
+	background-image:url(images/sideArticle_mid.png);
+	background-repeat:repeat;
+	border-radius: 15px;
+	font-size: 13px;
+}
+
+/* parent height & container divs */
+
+.colParent {
+	float:left;
+	font-size: 13px;
+}
+
+
+/* ---- SECTION PARTS ---- */
+
+.sectionContainer2 {
+	background-color: rgba(186, 207, 221, 0.3);
+	color: #666;
+	padding: 5px 20px 10px 20px;
+	border-radius: 20px;
+	border: solid 2px rgb(0, 156, 212);
+	clear: both;
+	font-size: 13px;
+}
+.sectionContainer {
+	color: #666;
+	clear: both;
+	font-size: 13px;
+}
+
+.sectionHeaderB_top {
+	font-family:"Berkshire Swash";
+	font-size: 14px;
+	color: rgb(160, 107, 14);
+	clear:both;
+	margin-top:20px;
+	font-size: 13px;
+}
+
+.sectionHeaderB {
+	font-family:"Berkshire Swash";
+	font-size: 14px;
+	color: rgb(160, 107, 14);
+	border-top: solid 2px rgb(160, 107, 14);
+	clear:both;
+	margin-top:20px;
+	font-size: 13px;
+	}
+
+.sectionbody {
+	margin:5px 0px 15px 0px;
+	font-size: 13px;
+}
+
+.sectionBody_last {
+	margin:5px 0px 5px 0px;
+	font-size: 13px;
+}
+	
+	
+/* ----- CHARACTER PAGE ------ */ 
+
+.cisPortCard {
+	padding: 0px 10px;
+	width: 230px;
+	height: 360px;
+	float: left;
+	clear: none;
+}
+
+.cisPort_Img {
+	height: 256px;
+}
+
+.cisPort_info {
+	background-image:url(images/cisPort_Border_PcBottom.png);
+	height: 94px;
+	background-repeat:no-repeat;
+	padding: 5px 20px 0px 20px;
+	text-align:center;
+}
+
+.cisPort_info_support {
+	background-image:url(images/cisPort_Border_SupportBottom.png);
+	height: 94px;
+	background-repeat:no-repeat;
+	padding: 5px 20px 0px 20px;
+	text-align:center;
+}
+
+.cisPort_info_IMP {
+	background-image:url(images/cisPort_Border_IMP-Bottom.png);
+	height: 94px;
+	background-repeat:no-repeat;
+	padding: 5px 20px 0px 20px;
+	text-align:center;
+}
+
+.cisPortHeader {
+	font-family:"Berkshire Swash";
+	font-size: 15px;
+	color: rgb(160, 107, 14);
+}
+
+.abcMenu {
+	text-align:center; 
+	font-size:15px;
+}
+
+.abcs {
+	 border-top: solid 3px rgb(0, 156, 212);
+	 clear:both;
+	 margin-top: 20px;
+	}
+.abcs_artpage {
+	border-top: solid 3px rgb(0, 156, 212);
+	 clear:both;
+	 margin: 30px 0px 20px 0px;
+	}
+
+.abcLetter {
+	font-family:"Berkshire Swash";
+	font-size: 20px;
+	color: rgb(160, 107, 14);
+	background-color:rgba(0, 156, 212, 0);
+	margin-left:5px;
+	margin-right:10px;
+}
+
+/* ----- FOOTER ----- */
+
+.footer {
+	font-size: 12px;
+	text-align:center;
+	clear: both;
+	height:90px;
+	background-image:url(images/CoA_Footer.png);
+	background-repeat:no-repeat;
+	padding-top: 10px;
+}
+
+/* --- MISC --- */
+
+.bottomOfPage {
+	height:25px;
+	clear:both;
+}
+.cisSection:hover {
+	top: 0px;
+	height: auto;
+}
+.elementalInfo:hover {
+	top: 0px;
+	height: auto;
+}
+.skillInfo:hover {
+	height: auto;
+}

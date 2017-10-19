@@ -1,0 +1,28 @@
+/*File Name: databaseMod.css 
+Date: 10/19/2017
+Programmer: Rochelle Simpson
+
+Font Size Control
+*/
+
+
+#char-roster {
+	font-size:12px;
+}
+
+.display{
+	font-size:12px;
+	}
+
+.scText {
+	color: #fff;
+	font-size:12px;
+}
+
+.titleData {
+	color: #fff;
+	font-size:12px;
+}
+
+#credits	{ border-top:1px solid rgb(186, 207, 221);margin:30px 10px 10px 10px;padding:10px; }
+#credits p	{ font-size:10px;margin:0;padding:0; }
