@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<head>
+<title> Homework 3 </title>
+<link href="css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<link href="css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<div class="container">
+<div class = "col-md-4">
+<h2>Homework 3: </h2> 
+    <small>Java to C# Conversion</small><br>
+    <small>Calculator App</small>
+</div>
+<div class = "col-md-8">
+    <p>The class was given a file of java classes that createa a Calculator App. Our goal is to convert that application from one langauge (Java) to another (C#) and deal with the various issues that crop up between the two.</p>
+    
+    <h2>The Archive</h2>
+    <p>The first part of the process is to look over the Java file and see what issues jump out at me as well as what things I need to preserve.</p>
+    <p><strong>THE FILE: </strong><a href="javacode.zip" >>LINK<< </a></p>
+    <p>Already a few things stand out as problematic. The first is the Scanner class, which doesn't exist in C#. The second is that C# deal with a lot of the syntax differently as well. <em>(Example: A method call in Java begins with a lowercase letter but in C# it must be uppercase.)</em></p>
+    
+    <h2> Git Branching </h2>
+    <p> Once more we create a branch for the assignment at hand, this time called HW3.</p>
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">git checkout -b HW3
+    </pre></div>
+    <p>This code both creats the new branch and checks it out so I can get to work.</p>
+
+    <h2>Virtual Studio 2017</h2>
+    <p>A requirement for this homework is to download and work in Virtual Studio 2017. Given I am a college student (read: funds are limited) I went for the Community version. I was impressed by just how long it took to download...</p>
+    
+    <img src="Screen%20Shot%202017-10-19%20at%204.47.40%20PM.png">
+    
+    <h2>The Scanner</h2>
+    <p>The biggest translation issue is the Scanner, since it doesn't exist in C# but is essential to how the Calculator operates. The original code looked like this: </p>
+    
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">import java.util.Scanner;
+    import java.io.IOException;
+
+    /**
+     *  Command line postfix calculator.  This code makes use of java.lang.IllegalArgumentException
+     *	to indicate when there is a problem with the input expression.  I probably should have written my own
+     *	exception class that is specific to this application, but this one sounds appropriate. 
+     *
+     *@author    Scot Morse
+     */
+    public class Calculator
+    <span style="color: #333333">{</span>
+        /**
+         *  Our data structure, used to hold operands <span style="color: #008800; font-weight: bold">for </span>the postfix calculation.
+         */
+        private StackADT <span style="color: #996633">stack</span> <span style="color: #333333">=</span> new LinkedStack<span style="color: #333333">()</span>;
+
+        /** Scanner to get input from the user from the <span style="color: #007020">command </span>line. */
+        private Scanner <span style="color: #996633">scin</span> <span style="color: #333333">=</span> new Scanner<span style="color: #333333">(</span> System.in <span style="color: #333333">)</span>;
+    </pre></div>
+
+    <p>Then it is implimented in fashions such as this: </p>
+    
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">Scanner <span style="color: #996633">st</span> <span style="color: #333333">=</span> new Scanner<span style="color: #333333">(</span> input <span style="color: #333333">)</span>;
+     <span style="color: #008800; font-weight: bold">while</span><span style="color: #333333">(</span> st.hasNext<span style="color: #333333">()</span> <span style="color: #333333">)</span>
+     <span style="color: #333333">{</span>
+	<span style="color: #008800; font-weight: bold">if</span><span style="color: #333333">(</span> st.hasNextDouble<span style="color: #333333">()</span> <span style="color: #333333">)</span>
+	<span style="color: #333333">{</span>
+        ...
+    </pre></div>
+    
+    <h2>The Fix</h2>
+    
+    <p>Now, I freely admit I am completely new to C# as a langauge. I've only really used Java and Swift as object orientated programming languages go. However, with a lot of research I found the following fix that seems to work.</p>
+    
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">public string<span style="color: #333333">[]</span> Scanner<span style="color: #333333">(</span>string phrase<span style="color: #333333">){</span>
+    <span style="color: #996633">phrase</span> <span style="color: #333333">=</span> Console.ReadLine<span style="color: #333333">()</span>;
+    string<span style="color: #333333">[]</span> <span style="color: #996633">separators</span> <span style="color: #333333">=</span> <span style="color: #333333">{</span> <span style="background-color: #fff0f0">&quot;,&quot;</span>, <span style="background-color: #fff0f0">&quot;.&quot;</span>, <span style="background-color: #fff0f0">&quot;!&quot;</span>, <span style="background-color: #fff0f0">&quot;?&quot;</span>, <span style="background-color: #fff0f0">&quot;;&quot;</span>, <span style="background-color: #fff0f0">&quot;:&quot;</span>, <span style="background-color: #fff0f0">&quot; &quot;</span> <span style="color: #333333">}</span>;
+    string<span style="color: #333333">[]</span> <span style="color: #996633">words</span> <span style="color: #333333">=</span> new string<span style="color: #333333">[</span>20<span style="color: #333333">]</span>;
+
+    <span style="color: #996633">words</span> <span style="color: #333333">=</span> phrase.Split<span style="color: #333333">(</span>separators, StringSplitOptions.RemoveEmptyEntries<span style="color: #333333">)</span>;
+    <span style="color: #008800; font-weight: bold">return </span>words;
+    <span style="color: #333333">}</span>
+    </pre></div>
+    
+    <p>This creates me a method that can perform much the same functions as the Scanner utility - or at least that is the idea. It is implimented in forms such as: </p>
+
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">string <span style="color: #996633">input</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;2 2 +&quot;</span>;
+    Console.Write<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;&gt; &quot;</span><span style="color: #333333">)</span>; // prompt user
+
+    string<span style="color: #333333">[]</span> <span style="color: #996633">inputArray</span>     <span style="color: #333333">=</span> Scanner<span style="color: #333333">(</span>input<span style="color: #333333">)</span>;
+    <span style="color: #008800; font-weight: bold">for</span> <span style="color: #333333">(</span>int <span style="color: #996633">i</span> <span style="color: #333333">=</span> 0; i &lt; inputArray.Length; i++<span style="color: #333333">)</span>
+    <span style="color: #333333">{</span>
+       // See <span style="color: #008800; font-weight: bold">if </span>the user wishes to quit
+       <span style="color: #008800; font-weight: bold">if</span> <span style="color: #333333">(</span>inputArray<span style="color: #333333">[</span>i<span style="color: #333333">]</span>.StartsWith<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;q&quot;</span>, StringComparison.Ordinal<span style="color: #333333">)</span> <span style="color: #333333">||</span> inputArray<span style="color: #333333">[</span>i<span style="color: #333333">]</span>.StartsWith<span style="color: #333333">(</span><span style="background-color: #fff0f0">&quot;Q&quot;</span>, StringComparison.Ordinal<span style="color: #333333">))</span>
+       <span style="color: #333333">{</span>
+       <span style="color: #008800; font-weight: bold">return </span><span style="color: #007020">false</span>;
+       <span style="color: #333333">}</span>
+       ...
+       </pre></div>
+    
+    <h2>Git Merging</h2>
+    <p>In the end we re-merged our new path with the "master" one. While normally this code snippet would include a fetch check for changes on the master path, I am operating alone and only one this branch so I'm not concerned about it yet. </p>
+    
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">git checkout master
+    git merge HW3
+    </pre></div>
+
+</div>
+</div>
+</body>
+</html>
