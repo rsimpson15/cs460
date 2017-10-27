@@ -26,5 +26,25 @@ namespace WebApplication2.Controllers
 
             return View();
         }
+
+        public ActionResult Home()
+        {
+            return View();
+        }
+
+        public ActionResult Page1()
+        {
+            return View();
+        }
+
+        public ActionResult Page2()
+        {
+            return View();
+        }
+
+        public ActionResult Page3()
+        {
+            return View();
+        }
     }
 }
