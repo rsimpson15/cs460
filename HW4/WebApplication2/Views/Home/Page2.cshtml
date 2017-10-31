@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Page2";
+}
+
+<h2>Translation App</h2>
+
+<div>
+    <form method="post" id="form" action="/Home/Page2">
+        <p>
+            This is an English to Piglatin translator, enter your word in the first text box and
+            then a P or E for which you'd like it to convert to (Piglatin to English or Visa Versa).
+            The resulting page will give you the translated word.
+        </p>
+        <strong>Your Word: </strong>
+        <input type="text" name="feildOne" placeholder="Your Word Here" value="" />
+        <strong>E or P? </strong>
+        <input type="text" name="feildTwo" placeholder="E or P Only" value="" />
+        <input type="submit" name="submit" value="submit" />
+    </form>
+
+    <p><strong>Translation: </strong> <em> @ViewData["word"] </em></p>
+</div>
+
