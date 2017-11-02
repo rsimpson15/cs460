@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Page3";
+}
+
+<h2>Loan Calculator</h2>
+
+<div>
+    <form method="post" id="form" action="/Home/Page3">
+        <p>
+            This is a simple Loan Calculator.
+        </p>
+        <strong>Amount Borrowed: </strong>
+        <input type="number" name="amount" value="" style="margin-left:5px"/> <br>
+        <strong>Interest Rate: </strong>
+        <input type="number" name="interest" value="" style="margin-left:42px"/> <br>
+        <strong>Term of Loan: </strong>
+        <input type="number" name="term" value="" style="margin-left:39px"/> 
+    </form>
+    </div>
+<div>
+    <input type="submit" name="submit" value="Submit" />
+</div>
+    @if(ViewBag.total != null){
+        <p><strong>Total Amount to Repay: </strong> 
+        <em> @ViewBag.total </em></p>
+    }
+</div>
+
+

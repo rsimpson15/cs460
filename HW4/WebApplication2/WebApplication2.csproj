@@ -187,11 +187,20 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
     <Content Include="Views\Home\Page1.cshtml" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\Home\Page2.cshtml" />
+    <Content Include="Views\Home\Page3.cshtml" />
+>>>>>>> feature_page3
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+<<<<<<< HEAD
     <Folder Include="Views\Page1\" />
+=======
+    <Folder Include="Views\Page3\" />
+>>>>>>> feature_page3
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

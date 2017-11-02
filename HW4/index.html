@@ -1,0 +1,307 @@
+<!DOCTYPE>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Homework 4 </title>
+<link href="WebApplication2/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class = "col-md-4">
+        <h2>Homework 4: </h2> <small>Translation Apps & Loan Calculator</small>
+    </div>
+
+    <div class = "col-md-8">
+        <p>This particular assignment was broken down into four parts.</p>
+        <ol>
+            <li>Create a Home Page with a list of links to other pages.</li>
+            <li>Create a Page 1 with an App using two text boxes that perform a calculation and return a value using ViewBag only.</li>
+            <li>Create a Page 2 with an App just like Page 1 but it uses Http Post and Get to transger the data.</li>
+            <li>Create a Page 3 with a Loan Calculator App.</li>
+        </ol>
+        
+        <p>Each step must be done on its own feature branch and pushed through the command line.</p>
+
+        <h2>Home Page</h2>
+
+        <p>Firstly, we create the github branch to operate on.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git checkout -b feature_home</span>
+        </pre></div>
+        
+        <p>Next, we generate a new page in Visual Studio and add a list with links to our future pages. While the pages do not exist yet, we know their names so we can link to them anyways.The links are generate using Razor html ActionLink links.</p>
+
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;ul&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>@Html.ActionLink(&quot;Page 1&quot;, &quot;Index&quot;, &quot;Home/Page1&quot;)<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>@Html.ActionLink(&quot;Page 2&quot;, &quot;Index&quot;, &quot;Home/Page2&quot;)<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;li&gt;</span>@Html.ActionLink(&quot;Page 3&quot;, &quot;Index&quot;, &quot;Home/Page3&quot;)<span style="color: #007700">&lt;/li&gt;</span>
+        <span style="color: #007700">&lt;/ul&gt;</span>
+        </pre></div>
+        
+        <p>Then we push that to the server.</p>
+
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git add HW4</span>
+        <span style="color: #888888">git commit HW4</span>
+        <span style="color: #888888">git push origin feature_home</span>
+        <span style="color: #888888">git checkout master</span>
+        <span style="color: #888888">git merge feature_home</span>
+        </pre></div>
+        
+        <h2>Page 2 - Tranlsation App, Version 1.0</h2>
+
+        <p>On a random whim of inspiration, I attempted to create a very simple translation app - in this case it is for English <=> Piglatin. For those who might not know of Piglatin, the basic rule of the langauge are:</p>
+        <ol> 
+            <li>Take the start of a word, attach it to the back.</li>
+            <li>Attach "ay" to the end of the new word.</li>
+        </ol>
+        
+        <p>Firstly, we create the new branch.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git checkout -b feature_page1</span>
+        </pre></div>
+        
+        <p>Then we create the view layout, complete with two text boxes, a submit button and a place to display the results.</p>
+
+        <img src="WebApplication2/page1_snip.jpg">
+        
+        <p>Next, we create the controller method to pass and return the values.</p>
+        
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Page1</span>()
+        {
+            <span style="color: #333399; font-weight: bold">string</span> word;
+            <span style="color: #333399; font-weight: bold">string</span> lang;
+
+            <span style="color: #008800; font-weight: bold">if</span> (!<span style="color: #333399; font-weight: bold">string</span>.IsNullOrEmpty(Request.Form[<span style="background-color: #fff0f0">&quot;feildOne&quot;</span>]) &amp;&amp; !<span style="color: #333399; font-weight: bold">string</span>.IsNullOrEmpty(Request.Form[<span style="background-color: #fff0f0">&quot;feildTwo&quot;</span>]))
+            {
+                word = Request.Form[<span style="background-color: #fff0f0">&quot;feildOne&quot;</span>];
+                lang = Request.Form[<span style="background-color: #fff0f0">&quot;feildTwo&quot;</span>];
+                <span style="color: #333399; font-weight: bold">int</span> size = word.Length - <span style="color: #6600EE; font-weight: bold">2</span>;
+
+                <span style="color: #008800; font-weight: bold">if</span> (lang == <span style="background-color: #fff0f0">&quot;P&quot;</span> || lang == <span style="background-color: #fff0f0">&quot;p&quot;</span>)
+                {
+                    <span style="color: #333399; font-weight: bold">string</span> flavor = <span style="background-color: #fff0f0">&quot;ay&quot;</span>;
+                    <span style="color: #008800; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">1</span>)
+                    {
+                        ViewBag.word = word + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">2</span>)
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> first = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">0</span>);
+                        <span style="color: #333399; font-weight: bold">string</span> last = word.Substring(<span style="color: #6600EE; font-weight: bold">1</span>, <span style="color: #6600EE; font-weight: bold">1</span>);
+                        ViewBag.word = last + first + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">3</span>)
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> start = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">1</span>);
+                        <span style="color: #333399; font-weight: bold">string</span> end = word.Substring(<span style="color: #6600EE; font-weight: bold">2</span>, <span style="color: #6600EE; font-weight: bold">2</span>);
+                        ViewBag.word = end + start + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span>
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> start = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">1</span>).ToLower();
+                        <span style="color: #333399; font-weight: bold">string</span> bulk = word.Substring(<span style="color: #6600EE; font-weight: bold">2</span>, size);
+                        ViewBag.word = bulk + start + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                }
+                <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (lang == <span style="background-color: #fff0f0">&quot;E&quot;</span> || lang == <span style="background-color: #fff0f0">&quot;e&quot;</span>)
+                {
+                    <span style="color: #333399; font-weight: bold">string</span> end = word.Substring(word.Length - <span style="color: #6600EE; font-weight: bold">3</span>, size - <span style="color: #6600EE; font-weight: bold">2</span>);
+                    <span style="color: #333399; font-weight: bold">string</span> bulk = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, size - <span style="color: #6600EE; font-weight: bold">4</span>);
+                    ViewBag.word = end + bulk;
+                    ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                }
+                <span style="color: #008800; font-weight: bold">else</span>
+                {
+                    ViewBag.ErrorMessage = <span style="background-color: #fff0f0">&quot;Please enter E for English or P for Piglatin.&quot;</span>;
+                    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                }
+            }
+            <span style="color: #008800; font-weight: bold">else</span>
+            {
+                ViewBag.ErrorMessage = <span style="background-color: #fff0f0">&quot;Please enter a value for both feilds.&quot;</span>;
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+            }
+        }
+        </pre></div>
+        
+        <p>Then we move things to the repo.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git add HW4</span>
+        <span style="color: #888888">git commit HW4</span>
+        <span style="color: #888888">git push origin feature_page1</span>
+        <span style="color: #888888">git checkout master</span>
+        <span style="color: #888888">git merge feature_page1</span>
+        </pre></div>
+        
+        <h2>Page 2 - Tranlsation App, Version 2.0</h2>
+
+        <p>Given the conditions were the same for this version, I saw no reason to complicate my life and used the same translation app logic - just upgraded it to the new Http Get and Post transfer of data. Before we begin, we first create the new branch to work on.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git checkout -b feature_page2</span>
+        </pre></div>
+        
+        <p>The changes that had to primarily take place were a a few additions to the form...</p>
+        <p> action="/Home/Page3" </p>
+        <p>And then we have to make a lot of changes to the controller methods - in fact we have to make TWO controller methods, a Get and a Post.</p>
+        
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000CC">        [HttpGet]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Page2</span>()
+        {
+            ViewBag.RequestMethod = <span style="background-color: #fff0f0">&quot;GET&quot;</span>;
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+        }
+
+        <span style="color: #0000CC">        [HttpPost]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Page2</span>(<span style="color: #333399; font-weight: bold">string</span> feildOne, <span style="color: #333399; font-weight: bold">string</span> feildTwo)
+        {
+            ViewBag.RequestMethod = <span style="background-color: #fff0f0">&quot;POST&quot;</span>;
+
+            <span style="color: #333399; font-weight: bold">string</span> word;
+            <span style="color: #333399; font-weight: bold">string</span> lang;
+
+            <span style="color: #008800; font-weight: bold">if</span> (!<span style="color: #333399; font-weight: bold">string</span>.IsNullOrEmpty(feildOne) &amp;&amp; !<span style="color: #333399; font-weight: bold">string</span>.IsNullOrEmpty(feildTwo))
+            {
+                word = feildOne;
+                lang = feildTwo;
+                <span style="color: #333399; font-weight: bold">int</span> size = word.Length - <span style="color: #6600EE; font-weight: bold">2</span>;
+
+                <span style="color: #008800; font-weight: bold">if</span> (lang == <span style="background-color: #fff0f0">&quot;P&quot;</span> || lang == <span style="background-color: #fff0f0">&quot;p&quot;</span>)
+                {
+                    <span style="color: #333399; font-weight: bold">string</span> flavor = <span style="background-color: #fff0f0">&quot;ay&quot;</span>;
+                    <span style="color: #008800; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">1</span>)
+                    {
+                        ViewBag.word = word + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">2</span>)
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> first = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">0</span>);
+                        <span style="color: #333399; font-weight: bold">string</span> last = word.Substring(<span style="color: #6600EE; font-weight: bold">1</span>, <span style="color: #6600EE; font-weight: bold">1</span>);
+                        ViewBag.word = last + first + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (word.Length == <span style="color: #6600EE; font-weight: bold">3</span>)
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> start = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">1</span>);
+                        <span style="color: #333399; font-weight: bold">string</span> end = word.Substring(<span style="color: #6600EE; font-weight: bold">2</span>, <span style="color: #6600EE; font-weight: bold">2</span>);
+                        ViewBag.word = end + start + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                    <span style="color: #008800; font-weight: bold">else</span>
+                    {
+                        <span style="color: #333399; font-weight: bold">string</span> start = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, <span style="color: #6600EE; font-weight: bold">1</span>).ToLower();
+                        <span style="color: #333399; font-weight: bold">string</span> bulk = word.Substring(<span style="color: #6600EE; font-weight: bold">2</span>, size);
+                        ViewBag.word = bulk + start + flavor;
+                        ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                        <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                    }
+                }
+                <span style="color: #008800; font-weight: bold">else</span> <span style="color: #0066BB; font-weight: bold">if</span> (lang == <span style="background-color: #fff0f0">&quot;E&quot;</span> || lang == <span style="background-color: #fff0f0">&quot;e&quot;</span>)
+                {
+                    <span style="color: #333399; font-weight: bold">string</span> end = word.Substring(word.Length - <span style="color: #6600EE; font-weight: bold">3</span>, size - <span style="color: #6600EE; font-weight: bold">2</span>);
+                    <span style="color: #333399; font-weight: bold">string</span> bulk = word.Substring(<span style="color: #6600EE; font-weight: bold">0</span>, size - <span style="color: #6600EE; font-weight: bold">4</span>);
+                    ViewBag.word = end + bulk;
+                    ViewData[<span style="background-color: #fff0f0">&quot;word&quot;</span>] = ViewBag.word;
+                    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                }
+                <span style="color: #008800; font-weight: bold">else</span>
+                {
+                    ViewBag.ErrorMessage = <span style="background-color: #fff0f0">&quot;Please enter E for English or P for Piglatin.&quot;</span>;
+                    <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+                }
+            }
+            <span style="color: #008800; font-weight: bold">else</span>
+            {
+                ViewBag.ErrorMessage = <span style="background-color: #fff0f0">&quot;Please enter a value for both feilds.&quot;</span>;
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+            }
+        }
+        </pre></div>
+
+                
+        <p>Then we move things to the repo.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git add HW4</span>
+        <span style="color: #888888">git commit HW4</span>
+        <span style="color: #888888">git push origin feature_page2</span>
+        <span style="color: #888888">git checkout master</span>
+        <span style="color: #888888">git merge feature_page2</span>
+        </pre></div>
+        
+        <h2>Page 3 - Loan Calculator</h2>
+
+        <p>For this one I created a loan calculator for simple interest. As always, we begin with a fresh branch to work on.</p>
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git checkout -b feature_page3</span>
+        </pre></div>
+        
+        <p>Then we create the View, which is another form as we saw in the previous examples - in fact it is identical so I'm not going to put a code snippet this time - the only changes are the names of the fields and that the action method for the form calls /Home/Page3.</p>
+        
+        <p>Then we do the real work in the controller. It bears noting that this portion became a battle of attrition - a battle I sadly did not win. I had to make a choice here, like a General looking out over the battlefield, and had to sacrifice the points I might have gained by fighting this another few days in consideration of the fact I need to still do Lab 5 in the next few days.</p>
+        
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000CC">        [HttpGet]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Page3</span>()
+        {
+            ViewBag.RequestMethod = <span style="background-color: #fff0f0">&quot;GET&quot;</span>;
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+        }
+
+        <span style="color: #0000CC">        [HttpPost]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Page3</span>(<span style="color: #333399; font-weight: bold">decimal?</span> amount, <span style="color: #333399; font-weight: bold">decimal?</span> interest, <span style="color: #333399; font-weight: bold">decimal?</span> term)
+        {
+            ViewBag.RequestMethod = <span style="background-color: #fff0f0">&quot;POST&quot;</span>;
+            <span style="color: #333399; font-weight: bold">decimal</span> principle, rate, time, total;
+
+            <span style="color: #008800; font-weight: bold">if</span> (amount != <span style="color: #008800; font-weight: bold">null</span> &amp;&amp; interest != <span style="color: #008800; font-weight: bold">null</span> &amp;&amp; term != <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                principle = Convert.ToDecimal(amount);
+                rate = Convert.ToDecimal(interest);
+                time = Convert.ToDecimal(term);
+                total = (principle * time * rate) / <span style="color: #6600EE; font-weight: bold">100</span>;
+                ViewBag.total = total;
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+            }
+            <span style="color: #008800; font-weight: bold">else</span>
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">HttpStatusCodeResult</span>(HttpStatusCode.BadRequest);
+            }
+        }
+        }
+        </pre></div>
+
+        
+        
+
+    </div>
+</div>
+</body>
+</html>
