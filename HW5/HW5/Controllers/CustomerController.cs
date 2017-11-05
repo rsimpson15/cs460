@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HW5.DAL;
 using HW5.Models;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
 
 //In a futile attempt to make this thing like itself, I did operate off methods from 
 //the instructors own example, as a result some comments are generated from that code below.
@@ -35,16 +34,27 @@ namespace HW5.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] customer customer)
+        public ActionResult Create([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] Customer customer)
         {
             ViewBag.RequestMethod = "POST";
+
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Submissions");
             }
-            return View(customer);
+            else
+            {
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            }
+        }
+
+        //GET: Submissions
+        [HttpGet]
+        public ActionResult Submissions()
+        {
+            return View();
         }
 
         // GET: Customer/Edit/5
@@ -54,7 +64,7 @@ namespace HW5.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -67,7 +77,7 @@ namespace HW5.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] customer customer)
+        public ActionResult Edit([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +95,7 @@ namespace HW5.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            customer customer = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -98,7 +108,7 @@ namespace HW5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            customer user = db.Customers.Find(id);
+            Customer customer = db.Customers.Find(id);
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");

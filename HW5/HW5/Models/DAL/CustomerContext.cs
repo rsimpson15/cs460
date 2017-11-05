@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using HW5.DAL;
+using HW5.Models;
 
 namespace HW5.DAL
 {

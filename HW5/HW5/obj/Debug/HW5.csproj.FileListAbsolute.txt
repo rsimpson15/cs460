@@ -82,3 +82,7 @@ C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\obj\Debug\HW5.csprojResolveAss
 C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\obj\Debug\HW5.csproj.CoreCompileInputs.cache
 C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\obj\Debug\HW5.dll
 C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\obj\Debug\HW5.pdb
+C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\bin\EntityFramework.dll
+C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\bin\EntityFramework.SqlServer.dll
+C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\bin\EntityFramework.xml
+C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\bin\EntityFramework.SqlServer.xml
