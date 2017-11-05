@@ -1,43 +1,36 @@
-﻿
+﻿@model IEnumerable<HW5.Models.customer>
+
 @{
     ViewBag.Title = "Submissions";
 }
 
 <h2>Submissions</h2>
 
-    @foreach (var item in Model.Customers)
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Id)</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Dob)</th>
+        <th>@Html.DisplayNameFor(model => model.Street)</th>
+        <th>@Html.DisplayNameFor(model => model.City)</th>
+        <th>@Html.DisplayNameFor(model => model.StateCode)</th>
+        <th>@Html.DisplayNameFor(model => model.ZipCode)</th>
+        <th>@Html.DisplayNameFor(model => model.County)</th>
+    </tr>
+
+    @foreach (var customer in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dob)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Street)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StateCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.County)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", { id = item.Id })  |
-                @Html.ActionLink("Delete", "Delete", { id = item.Id })
-            </td>
+            <td>@Html.DisplayFor(modelItem => customer.Id)</td>
+            <td>@Html.DisplayFor(modelItem => customer.Name)</td>
+            <td>@Html.DisplayFor(modelItem => customer.Dob)</td>
+            <td>@Html.DisplayFor(modelItem => customer.Street)</td>
+            <td>@Html.DisplayFor(modelItem => customer.City)</td>
+            <td>@Html.DisplayFor(modelItem => customer.StateCode)</td>
+            <td>@Html.DisplayFor(modelItem => customer.ZipCode)</td>
+            <td>@Html.DisplayFor(modelItem => customer.County)</td>
         </tr>
     }
+    </table>
 
 

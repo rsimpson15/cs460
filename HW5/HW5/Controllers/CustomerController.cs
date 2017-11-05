@@ -23,22 +23,8 @@ namespace HW5.Controllers
             return View(db.Customers.ToList());
         }
 
-        // GET: Customer/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(customer);
-        }
-
-        // GET: Customer/Create
+        //Get: Create 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -49,15 +35,15 @@ namespace HW5.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] customer customer)
         {
+            ViewBag.RequestMethod = "POST";
             if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Submissions");
             }
-
             return View(customer);
         }
 
@@ -68,7 +54,7 @@ namespace HW5.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -81,7 +67,7 @@ namespace HW5.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +85,7 @@ namespace HW5.Controllers
             {
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            customer customer = db.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -112,7 +98,7 @@ namespace HW5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? id)
         {
-            Customer user = db.Customers.Find(id);
+            customer user = db.Customers.Find(id);
             db.Customers.Remove(customer);
             db.SaveChanges();
             return RedirectToAction("Index");
