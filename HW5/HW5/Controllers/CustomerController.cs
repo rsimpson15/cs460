@@ -17,11 +17,6 @@ namespace HW5.Controllers
     {
         private static CustomerContext db = new CustomerContext();
 
-        public ActionResult Index()
-        {
-            return View(db.Customers.ToList());
-        }
-
         //Get: Create 
         [HttpGet]
         public ActionResult Create()
@@ -29,11 +24,10 @@ namespace HW5.Controllers
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Customer/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id, Dob, Name, Street, City, StateCode, ZipCode, County")] Customer customer)
         {
             ViewBag.RequestMethod = "POST";
@@ -54,7 +48,7 @@ namespace HW5.Controllers
         [HttpGet]
         public ActionResult Submissions()
         {
-            return View();
+            return View(db.Customers.ToList());
         }
 
         // GET: Customer/Edit/5

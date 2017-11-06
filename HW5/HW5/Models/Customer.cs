@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using HW5.DAL;
+using HW5.Models;
 
 namespace HW5.Models
 {
