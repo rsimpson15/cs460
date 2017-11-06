@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container">
+    <!--Left Hand Col-->
+    <div class="col-md-8">
+        <h2>Change of Address Notice For DMV Records</h2>
+        
+        <form method="post" name ="form" id="form">
+            <p><strong>NOTE: </strong>
+            ALL information is REQUIRED to change your address.</p><br />
+
+            <!--Customer ID, Field Name: id-->
+            <div class="col-md-4">
+                <label for="Id">ODL / Permit / ID / Customer # </label><br />
+                <input type="text" name="Id" value="" style="width:100px" /><br />
+            </div> <br />
+
+            <!--Customer DOB, Field Name: dob-->
+            <div class="col-md-4">
+                <label for="Dob">Date of Birth</label><br />
+                <input type="date" name="Dob" value="" title="Date of Birth" style="width:120px" /><br />
+            </div><br /><br />
+
+            <!--Customer Name, Field Name: name-->
+            <div class="col-md-8">
+                <label for="Name">Full Legal Name (First, Last & Middle)</label>
+                <input type="text" name="Name" value="" title="Full Name" style="width:250px; margin-left:15px" /> <br />
+            </div>
+
+                <div style="padding-top:70px">
+                    <p style="margin-left:15px">
+                        <strong>NEW RESIDENCE ADDRESS</strong><br />
+                        (No Post Office Box Number or mail forwarding address)
+                    </p>
+                </div>
+
+                <!--Customer Address, Field Name: street-->
+                <label for="Street" style="margin-left:15px">New Address</label><br />
+                <input type="text" name="Street" value="" style="width:250px; margin-left:15px" /><br />
+
+                <!--Customer Address, Field Name: city-->
+                <div class="col-md-4">
+                    <label for="City">City</label><br />
+                    <input type="text" name="City" value="" style="width:120px" /><br />
+                </div>
+
+                <!--Customer Address, Field Name: state-->
+                <div class="col-md-5">
+                    <label for="StateCode">State Code</label><br />
+                    <input type="text" name="StateCode" title="State" value="" style="width:40px" /><br />
+                </div>
+
+                <!--Customer Address, Field Name: zip-->
+                <div class="col-md-4">
+                    <label for="ZipCode">Zip Code</label><br />
+                    <input type="text" name="ZipCode" value="" title-="Zip Code" style="width:80px" /><br />
+                </div>
+
+                <!--Customer Address, Field Name: county-->
+                <div class="col-md-4">
+                    <label for="County">County</label><br />
+                    <input type="text" name="County" value="" style="width:120px" /><br />
+                </div>
+                <div class="col-md-12" style="clear:both; padding-top: 20px">
+                    <input type="submit" name="submit" value="Submit" />
+                </div>
+</form>
+</div>
+
+    <!--Right Hand Col-->
+    <div class="col-md-4">
+        <div style="outline: 1px solid black;">
+            <p>Oregon Law requires you to notify DMV of any changes of 
+            address within 30 days.</p>
+        </div>
+
+        <div>
+            <h2><strong>INSTRUCTIONS:</strong></h2>
+            <ul>
+                <li>Read the information on the back of this form.</li>
+                <li><strong>Please PRINT.</strong></li>
+                <li>You MUST include <strong>all</strong> information
+                or DMV may not be able to update the address.</li>
+                <li>Remove the envelope where indicated below, place
+                the address change form in the envelope and mail to:
+                DMV, 1905 Lana Ave NE, Salem OR 97314.</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
