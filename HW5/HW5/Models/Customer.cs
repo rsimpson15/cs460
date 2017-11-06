@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using HW5.DAL;
 using HW5.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HW5.Models
 {
@@ -12,6 +13,7 @@ namespace HW5.Models
     {
 
         [Range(0, 99999), Required, Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Required]
