@@ -91,15 +91,64 @@
 
         <p>Now we need these guys to make friendly - the issue? From what I could devise, they like each other about as much as most inlaws at Thanksgiving dinner. So, fistly we need to get the connection string so that the program even knows what its supposed to look for.</p>
         
-        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">  <span style="color: #007700">&lt;connectionStrings&gt;</span>
+        <span style="color: #007700">&lt;add</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;CustomerDBContext&quot;</span> <span style="color: #0000CC">connectionString=</span><span style="background-color: #fff0f0">&quot;Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Rochelle Simpson\Documents\cs460\HW5\HW5\App_Data\Customers.mdf;Integrated Security=True&quot;</span> <span style="color: #0000CC">providerName=</span><span style="background-color: #fff0f0">&quot;System.Data.SqlClient&quot;</span><span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;/connectionStrings&gt;</span>
+        </pre></div>
         
-        <p>With that done, we then create a very basic controller class.</p>
+        <p>With that done, we then create a very basic Model class, compelte with typed constraints.</p>
         
-        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">    <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">Customer</span>
+        {
+
+        <span style="color: #0000CC">        [Range(0, 99999), Required, Key]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span> Id { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [Required]</span>
+        <span style="color: #0000CC">        [Display(Name=&quot;Date of Birth&quot;)]</span>
+        <span style="color: #008800; font-weight: bold">public</span> DateTime Dob { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [StringLength(50), Required]</span>
+        <span style="color: #0000CC">        [Display(Name = &quot;Full Name&quot;)]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> Name { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [StringLength(100), Required]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> Street { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [StringLength(20), Required]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> City { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [StringLength(2), Required]</span>
+        <span style="color: #0000CC">        [Display(Name = &quot;State&quot;)]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> StateCode { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [Range(0, 99999), Required]</span>
+        <span style="color: #0000CC">        [Display(Name = &quot;Zip Code&quot;)]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">int</span> ZipCode { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        <span style="color: #0000CC">        [StringLength(20), Required]</span>
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #333399; font-weight: bold">string</span> County { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+        } 
+        </pre></div>
         
         <p>Followed by a more complicated context class that hooks into everything via a sub folder called "DAL" or Data Acess Layer.</p>
         
         <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">namespace</span> <span style="color: #0e84b5; font-weight: bold">HW5.DAL</span>
+        {
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">class</span> <span style="color: #BB0066; font-weight: bold">CustomerContext</span> : DbContext
+        {
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #0066BB; font-weight: bold">CustomerContext</span>() : <span style="color: #008800; font-weight: bold">base</span>(<span style="background-color: #fff0f0">&quot;name=CustomerDBContext&quot;</span>)
+        { }
+
+        <span style="color: #008800; font-weight: bold">public</span> <span style="color: #008800; font-weight: bold">virtual</span> DbSet&lt;Customer&gt; Customers { <span style="color: #008800; font-weight: bold">get</span>; <span style="color: #008800; font-weight: bold">set</span>; }
+
+            }
+        }
+        </pre></div>
         
         <h2>Form & Function</h2>
 
@@ -108,14 +157,225 @@
         <p>For the Create page I tried to mimic the DMV form as closely as possible. I was unclear if the "date signed" was a required field, since it went with signature. However, since it said to do everything else I did include the text involved.</p>
         
         <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;container&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #888888">&lt;!--Left Hand Col--&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-8&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;h2&gt;</span>Change of Address Notice For DMV Records<span style="color: #007700">&lt;/h2&gt;</span>
         
+        <span style="color: #007700">&lt;form</span> <span style="color: #0000CC">method=</span><span style="background-color: #fff0f0">&quot;post&quot;</span> <span style="color: #0000CC">name =</span><span style="background-color: #fff0f0">&quot;form&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;form&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;p&gt;&lt;strong&gt;</span>NOTE: <span style="color: #007700">&lt;/strong&gt;</span>
+            ALL information is REQUIRED to change your address.<span style="color: #007700">&lt;/p&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+
+            <span style="color: #888888">&lt;!--Customer ID, Field Name: id--&gt;</span>
+            <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+                <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;Id&quot;</span><span style="color: #007700">&gt;</span>ODL / Permit / ID / Customer # <span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;Id&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:100px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+            <span style="color: #007700">&lt;/div&gt;</span> <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+
+            <span style="color: #888888">&lt;!--Customer DOB, Field Name: dob--&gt;</span>
+            <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+                <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;Dob&quot;</span><span style="color: #007700">&gt;</span>Date of Birth<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;date&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;Dob&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">title=</span><span style="background-color: #fff0f0">&quot;Date of Birth&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:120px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+            <span style="color: #007700">&lt;/div&gt;&lt;br</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+
+            <span style="color: #888888">&lt;!--Customer Name, Field Name: name--&gt;</span>
+            <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-8&quot;</span><span style="color: #007700">&gt;</span>
+                <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;Name&quot;</span><span style="color: #007700">&gt;</span>Full Legal Name (First, Last <span style="color: #FF0000; background-color: #FFAAAA">&amp;</span> Middle)<span style="color: #007700">&lt;/label&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;Name&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">title=</span><span style="background-color: #fff0f0">&quot;Full Name&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:250px; margin-left:15px&quot;</span> <span style="color: #007700">/&gt;</span> <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+            <span style="color: #007700">&lt;/div&gt;</span>
+
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;padding-top:70px&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;p</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;margin-left:15px&quot;</span><span style="color: #007700">&gt;</span>
+                        <span style="color: #007700">&lt;strong&gt;</span>NEW RESIDENCE ADDRESS<span style="color: #007700">&lt;/strong&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                        (No Post Office Box Number or mail forwarding address)
+                    <span style="color: #007700">&lt;/p&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+
+                <span style="color: #888888">&lt;!--Customer Address, Field Name: street--&gt;</span>
+                <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;Street&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;margin-left:15px&quot;</span><span style="color: #007700">&gt;</span>New Address<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;Street&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:250px; margin-left:15px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+
+                <span style="color: #888888">&lt;!--Customer Address, Field Name: city--&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;City&quot;</span><span style="color: #007700">&gt;</span>City<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;City&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:120px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+
+                <span style="color: #888888">&lt;!--Customer Address, Field Name: state--&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-5&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;StateCode&quot;</span><span style="color: #007700">&gt;</span>State Code<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;StateCode&quot;</span> <span style="color: #0000CC">title=</span><span style="background-color: #fff0f0">&quot;State&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:40px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+
+                <span style="color: #888888">&lt;!--Customer Address, Field Name: zip--&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;ZipCode&quot;</span><span style="color: #007700">&gt;</span>Zip Code<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;ZipCode&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">title-=</span><span style="background-color: #fff0f0">&quot;Zip Code&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:80px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+
+                <span style="color: #888888">&lt;!--Customer Address, Field Name: county--&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;County&quot;</span><span style="color: #007700">&gt;</span>County<span style="color: #007700">&lt;/label&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;County&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:120px&quot;</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+                <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-12&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;clear:both; padding-top: 20px&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;submit&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;submit&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;Submit&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;/form&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+
+        <span style="color: #888888">&lt;!--Right Hand Col--&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-md-4&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;outline: 1px solid black;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;p&gt;</span>Oregon Law requires you to notify DMV of any changes of 
+            address within 30 days.<span style="color: #007700">&lt;/p&gt;</span>
+         <span style="color: #007700">&lt;/div&gt;</span>
+
+         <span style="color: #007700">&lt;div&gt;</span>
+            <span style="color: #007700">&lt;h2&gt;&lt;strong&gt;</span>INSTRUCTIONS:<span style="color: #007700">&lt;/strong&gt;&lt;/h2&gt;</span>
+            <span style="color: #007700">&lt;ul&gt;</span>
+                <span style="color: #007700">&lt;li&gt;</span>Read the information on the back of this form.<span style="color: #007700">&lt;/li&gt;</span>
+                <span style="color: #007700">&lt;li&gt;&lt;strong&gt;</span>Please PRINT.<span style="color: #007700">&lt;/strong&gt;&lt;/li&gt;</span>
+                <span style="color: #007700">&lt;li&gt;</span>You MUST include <span style="color: #007700">&lt;strong&gt;</span>all<span style="color: #007700">&lt;/strong&gt;</span> information
+                or DMV may not be able to update the address.<span style="color: #007700">&lt;/li&gt;</span>
+                <span style="color: #007700">&lt;li&gt;</span>Remove the envelope where indicated below, place
+                the address change form in the envelope and mail to:
+                DMV, 1905 Lana Ave NE, Salem OR 97314.<span style="color: #007700">&lt;/li&gt;</span>
+            <span style="color: #007700">&lt;/ul&gt;</span>
+                    <span style="color: #007700">&lt;/div&gt;</span>
+                <span style="color: #007700">&lt;/div&gt;</span>
+
+            <span style="color: #007700">&lt;/div&gt;</span>
+            </pre></div>
+
         <p>Then I created the Submission page by using Razor's build in HTML actions - in this case DisplayName and DisplayFor.</p>
         
         <!--Code Snippet-->
-        
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0000CC">&lt;table class=&quot;table&quot;&gt;</span>
+        <span style="color: #333333">&lt;</span>tr<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.Id)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.Name)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.Dob)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.Street)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.City)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.StateCode)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.ZipCode)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;</span>th<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayNameFor(model <span style="color: #333333">=&gt;</span> model.County)<span style="color: #333333">&lt;/</span>th<span style="color: #333333">&gt;</span>
+        <span style="color: #333333">&lt;/</span>tr<span style="color: #333333">&gt;</span>
+
+        <span style="color: #FF0000; background-color: #FFAAAA">@</span>foreach (var customer <span style="color: #000000; font-weight: bold">in</span> Model)
+        {
+            <span style="color: #333333">&lt;</span>tr<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.Id)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.Name)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.Dob)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.Street)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.City)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.StateCode)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.ZipCode)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+            <span style="color: #333333">&lt;</span>td<span style="color: #333333">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">@</span>Html.DisplayFor(modelItem <span style="color: #333333">=&gt;</span> customer.County)<span style="color: #333333">&lt;/</span>td<span style="color: #333333">&gt;</span>
+                <span style="color: #333333">&lt;/</span>tr<span style="color: #333333">&gt;</span>
+            }
+            <span style="color: #333333">&lt;/</span>table<span style="color: #333333">&gt;</span>
+        </pre></div>
+
         <p>Finally I went into the Controller for their page methods and added the following logic - ensuring I checked for nulls in the process.</p>
         
         <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"> <span style="color: #008800; font-weight: bold">private</span> <span style="color: #008800; font-weight: bold">static</span> CustomerContext db = <span style="color: #008800; font-weight: bold">new</span> CustomerContext();
+
+        <span style="color: #888888">//Get: Create </span>
+        <span style="color: #0000CC">        [HttpGet]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Create</span>()
+        {
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>();
+        }
+
+        <span style="color: #888888">// POST: Customer/Create</span>
+        <span style="color: #888888">// To protect from overposting attacks, please enable the specific properties you want to bind to, for </span>
+                <span style="color: #888888">// more details see https://go.microsoft.com/fwlink/?LinkId=317598.</span>
+        <span style="color: #0000CC">        [HttpPost]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Create</span>([Bind(Include = <span style="background-color: #fff0f0">&quot;Id, Dob, Name, Street, City, StateCode, ZipCode, County&quot;</span>)] Customer customer)
+        {
+            ViewBag.RequestMethod = <span style="background-color: #fff0f0">&quot;POST&quot;</span>;
+
+            <span style="color: #008800; font-weight: bold">if</span> (ModelState.IsValid)
+            {
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">RedirectToAction</span>(<span style="background-color: #fff0f0">&quot;Submissions&quot;</span>);
+            }
+            <span style="color: #008800; font-weight: bold">else</span>
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">HttpStatusCodeResult</span>(System.Net.HttpStatusCode.BadRequest);
+            }
+        }
+
+        <span style="color: #888888">//GET: Submissions</span>
+        <span style="color: #0000CC">        [HttpGet]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Submissions</span>()
+        {
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>(db.Customers.ToList());
+        }
+
+        <span style="color: #888888">// GET: Customer/Edit/5</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Edit</span>(<span style="color: #333399; font-weight: bold">int?</span> id)
+        {
+            <span style="color: #008800; font-weight: bold">if</span> (id == <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">HttpStatusCodeResult</span>(System.Net.HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            <span style="color: #008800; font-weight: bold">if</span> (customer == <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">HttpNotFound</span>();
+            }
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>(customer);
+        }
+
+        <span style="color: #888888">// POST: Users/Edit/5</span>
+        <span style="color: #888888">// To protect from overposting attacks, please enable the specific properties you want to bind to, for </span>
+        <span style="color: #888888">// more details see https://go.microsoft.com/fwlink/?LinkId=317598.</span>
+        <span style="color: #0000CC">        [HttpPost]</span>
+        <span style="color: #0000CC">        [ValidateAntiForgeryToken]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Edit</span>([Bind(Include = <span style="background-color: #fff0f0">&quot;Id, Dob, Name, Street, City, StateCode, ZipCode, County&quot;</span>)] Customer customer)
+        {
+            <span style="color: #008800; font-weight: bold">if</span> (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">RedirectToAction</span>(<span style="background-color: #fff0f0">&quot;Submissions&quot;</span>);
+            }
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>(customer);
+        }
+
+        <span style="color: #888888">// GET: Users/Delete/5</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Delete</span>(<span style="color: #333399; font-weight: bold">int?</span> id)
+        {
+            <span style="color: #008800; font-weight: bold">if</span> (id == <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #008800; font-weight: bold">new</span> <span style="color: #0066BB; font-weight: bold">HttpStatusCodeResult</span>(System.Net.HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            <span style="color: #008800; font-weight: bold">if</span> (customer == <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">HttpNotFound</span>();
+            }
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">View</span>(customer);
+        }
+
+        <span style="color: #888888">// POST: Users/Delete/5</span>
+        <span style="color: #0000CC">        [HttpPost, ActionName(&quot;Delete&quot;)]</span>
+        <span style="color: #0000CC">        [ValidateAntiForgeryToken]</span>
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">DeleteConfirmed</span>(<span style="color: #333399; font-weight: bold">int?</span> id)
+        {
+            Customer customer = db.Customers.Find(id);
+            db.Customers.Remove(customer);
+            db.SaveChanges();
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">RedirectToAction</span>(<span style="background-color: #fff0f0">&quot;Index&quot;</span>);
+                }
+            }
+        </pre></div>
 
     </div>
 </div>
