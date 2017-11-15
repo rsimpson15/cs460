@@ -5,6 +5,9 @@
 hw3/PostFixCalc.csproj
 hw3/PostFixCalc.sln
 
+#database files
+*.mdf
+*.ldf
 
 # User-specific files
 *.suo
