@@ -1,0 +1,26 @@
+﻿@model homework6.Models.ViewModel.ProductCatandSubCatVM
+
+@{
+    ViewBag.Title = "Index";
+}
+<!--Navigation-->
+<div class="col-md-12">
+    <p>
+        @foreach (var item in Model.ProductCategoriesName)
+        {
+            <strong>@Html.ActionLink(item.Name, "Index", new { id = item.ProductCategoryID })</strong>
+            <text><strong> &#187; </strong></text>
+            if (ViewBag.ID != null)
+            {
+                foreach (var item2 in item.ProductSubcategories)
+                {
+                    if (item2.ProductCategoryID == ViewBag.ID)
+                    {
+                        <text><strong> &#62; </strong></text> @Html.ActionLink(item2.Name, "Browse", new { id = item2.ProductSubcategoryID } )
+                    }
+                }
+            }
+        }
+    </p>
+</div>
+

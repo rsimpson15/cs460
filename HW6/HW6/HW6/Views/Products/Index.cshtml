@@ -1,0 +1,41 @@
+﻿
+@model IEnumerable<HW6.Models.ViewModel.ProductCatandSubCatVM>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Works</title>
+</head>
+
+<body>
+    <h2>Adventure Works</h2>
+
+    <div class="row col-md-12">
+        <ul class="list-group col-md-4">
+            <h3>Categories</h3>
+            <hr />
+            @foreach (var item in Model)
+            {
+                @Html.ActionLink(item.CatList.Name, "Index/" + item.CatList.ProductCategoryID, "ProductsController", new { @class = "list-group-item" })
+            }
+        </ul>
+        <div class="col-md-offset-1 col-md-4">
+            @if (ViewBag.ID != null)
+            {
+                <h3>Sub Categories</h3>
+                <ul class="list-group">
+                    @foreach (var item in Model)
+                    {
+                        @Html.ActionLink(item.SubCatList.Name, "Products/" + item.SubCatList.ProductSubcategoryID, "ProductsController", new { @class = "list-group-item" })
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+    </body>
+
