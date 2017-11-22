@@ -14,11 +14,13 @@ namespace homework6.Controllers
 {
     public class ProductController : Controller
     {
+        //Db Context
         private AdventureWorksDbContext db = new AdventureWorksDbContext();
 
         // GET: Product
         public ActionResult Index(int? id, int?subID)
         {
+            //Link up to ViewModel
             ProductCatandSubCatVM vm = new ProductCatandSubCatVM() {
                 ProductCategoriesName = db.ProductCategories,
                 ProductSubcategoriesName = db.ProductSubcategories
@@ -31,19 +33,23 @@ namespace homework6.Controllers
 
             return View(vm);
         }
-
+        
+        //GET: Browse
         public ActionResult Browse(int? id){
             ViewBag.SubID = id;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+            //Link up for ViewModel
             ProductCatandSubCatVM vm = new ProductCatandSubCatVM()
             {
                 ProductCategoriesName = db.ProductCategories,
                 ProductSubcategoriesName = db.ProductSubcategories.Where(p => p.ProductCategory.ProductCategoryID == id),
                 Product = db.ProductSubcategories.ToList()[id.Value - 1].Products.ToList()
             };
+            
             ViewBag.Count = vm.Product.Count() / 10;
 
             return View(vm);
@@ -57,7 +63,8 @@ namespace homework6.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            
+            //Link up to ViewModel
             ProductCatandSubCatVM vm = new ProductCatandSubCatVM()
             {
                 ProductCategoriesName = db.ProductCategories,
@@ -65,7 +72,8 @@ namespace homework6.Controllers
                 Product = db.Products.ToList(),
                 PReveiw = db.ProductReviews.ToList()
             };
-
+            
+            //Viewbag variables for display of individual products
             ViewBag.pName = db.Products.Where(p => p.ProductID == id).Select(p => p.Name).FirstOrDefault().ToString();
             ViewBag.pWeight = db.Products.Where(p => p.ProductID == id).Select(p => p.Weight).FirstOrDefault().ToString();
             ViewBag.pSize = db.Products.Where(p => p.ProductID == id).Select(p => p.Size).FirstOrDefault().ToString();
