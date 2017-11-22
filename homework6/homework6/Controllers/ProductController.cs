@@ -75,6 +75,39 @@ namespace homework6.Controllers
 
             return View(vm);
         }
+        
+        // POST: ~/Products/Product
+        //Again, Credit to Jake Hatfield
+        [HttpPost]
+        public ActionResult Product(int? id, string name, string email, int? rating, string comments)
+        {
+            // create a new ProductReview object
+            ProductReview review = db.ProductReviews.Create();
+
+            if (id == null || id.Equals("") || name == null || name.Equals("") || email == null || email.Equals("") || rating == null || rating.Equals("") || comments == null || comments.Equals(""))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            // add all the attributes of a Product Review to add it to the db
+            review.Comments = comments;
+            review.EmailAddress = email;
+            review.ModifiedDate = DateTime.Now; // correct date/time format
+            review.ProductID = (int)id;
+            review.Rating = (int)rating;
+            review.ReviewDate = DateTime.Now;
+            review.ReviewerName = name;
+
+            if (ModelState.IsValid)
+            {
+                db.ProductReviews.Add(review);
+                db.SaveChanges();
+                ViewBag.Success = "success";
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
 
 
         protected override void Dispose(bool disposing)
