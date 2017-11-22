@@ -1,0 +1,61 @@
+﻿@model homework6.Models.ViewModel.ProductCatandSubCatVM
+@{
+    ViewBag.Title = "Browse";
+}
+
+<!--Navigation-->
+<div class="col-md-12">
+    <p>
+        @foreach (var item in Model.ProductCategoriesName)
+        {
+            <strong>@Html.ActionLink(item.Name, "Index", new { id = item.ProductCategoryID })</strong>
+            <text><strong> &#187; </strong></text>
+            if (ViewBag.ID != null)
+            {
+                foreach (var item2 in item.ProductSubcategories)
+                {
+                    if (item2.ProductCategoryID == ViewBag.ID)
+                    {
+                        <text><strong> &#62; </strong></text> @Html.ActionLink(item2.Name, "Browse", new { id = item2.ProductSubcategoryID })
+                    }
+                }
+            }
+        }
+    </p>
+</div>
+
+
+@if (ViewBag.SubID != null)
+{
+    <h1 class="text-center page-header text-info">Browse Products</h1>
+    foreach (var item in Model.Product.Skip(0).Take(10))
+    {
+    <div class="col-sm-4" style="text-align:center; padding-bottom:25px;">
+        <figure class="figure">
+                @foreach (var item2 in item.ProductProductPhotoes)
+                {
+                       <img src="data:image;base64,@System.Convert.ToBase64String(item2.ProductPhoto.ThumbNailPhoto)"  />
+                }
+            <figcaption class="figure-caption">
+                <strong>@Html.ActionLink(item.Name, "Details", new { id = item.ProductID })<br /></strong>
+                <button type="button" class="btn btn-primary"><text><strong>&#36; </strong></text> @item.StandardCost</button>
+            </figcaption>
+        </figure>
+    </div>
+    }
+    <div class="col-lg-12" style="clear:both; text-align:center;">
+        <ul class="pagination pagination-lg">
+            <li><a href="#">«</a></li>
+            @{var count = 1;}
+            @while (count <= ViewBag.Count + 1) {
+                    <li>@Html.ActionLink(count.ToString(), "Details")</li>
+                    count =count + 1;
+             }
+            <li><a href="#">»</a></li>  
+        </ul>
+    </div>
+}
+
+
+
+

@@ -1,0 +1,214 @@
+<!DOCTYPE>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Homework 5 </title>
+<link href="WebApplication2/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class = "col-md-4">
+        <h2>Homework 6: </h2> <small>Adventure Works</small>
+    </div>
+
+    <div class = "col-md-8">
+        
+        <h2>Code First</h2>
+        <p>This assignment tasked us with using an already existing, massive, database - in this case Adventure Works. We were to import the database using Code First methods and then create an ability to browse the products.</p>
+
+        <p>Firstly, we create the github branch to operate on.</p>         
+        
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">git checkout -b HW6</span>
+        </pre></div>
+        
+        <p>Then I imported the database - this was a bit complicated because the download is in ".bak" format. I had to do a bit of digging to learn how to resort the database in SQL Server and then detach it so I could bring it into Visual Studio.</p>
+        <p>Once that was done, I had to use to "Code First" operation to get the models auto-generated. We used the tutorial located here: </p> >> <a href="https://msdn.microsoft.com/en-us/library/jj200620(v=vs.113).aspx">LINK</a> <<
+        
+        <h2>The Index</h2>
+
+        <p>My first step was to create a starting index now that I have a database to present information with. The most challenging aspect hit me from the get-go and that was creating a navigation without ruining the flow of information. Ultimately I settled on breadcrums since the Layout page proved to be a rahter involved thing to manipulate.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">        @foreach (<span style="color: #333399; font-weight: bold">var</span> item <span style="color: #008800; font-weight: bold">in</span> Model.ProductCategoriesName)
+        {
+            &lt;strong&gt;@Html.ActionLink(item.Name, <span style="background-color: #fff0f0">&quot;Index&quot;</span>, <span style="color: #008800; font-weight: bold">new</span> { id = item.ProductCategoryID })&lt;/strong&gt;
+            &lt;text&gt;&lt;strong&gt; &amp;<span style="color: #FF0000; background-color: #FFAAAA">#</span><span style="color: #6600EE; font-weight: bold">187</span>; &lt;/strong&gt;&lt;/text&gt;
+            <span style="color: #008800; font-weight: bold">if</span> (ViewBag.ID != <span style="color: #008800; font-weight: bold">null</span>)
+            {
+                <span style="color: #008800; font-weight: bold">foreach</span> (<span style="color: #333399; font-weight: bold">var</span> item2 <span style="color: #008800; font-weight: bold">in</span> item.ProductSubcategories)
+                {
+                    <span style="color: #008800; font-weight: bold">if</span> (item2.ProductCategoryID == ViewBag.ID)
+                    {
+                        &lt;text&gt;&lt;strong&gt; &amp;<span style="color: #FF0000; background-color: #FFAAAA">#</span><span style="color: #6600EE; font-weight: bold">62</span>; &lt;/strong&gt;&lt;/text&gt; @Html.ActionLink(item2.Name, <span style="background-color: #fff0f0">&quot;Browse&quot;</span>, <span style="color: #008800; font-weight: bold">new</span> { id = item2.ProductSubcategoryID } )
+                    }
+                }
+            }
+        }
+        </pre></div>
+
+        <h2>Browsing</h2>
+        <p>Next I created a view for the Browsing of products - including pagination or a limit view instead of the full list. Pagination can be done a number of ways, I struggled with which option I prefered but ultimately couldn't get it fully cooperate in any method. Bootstrap does provide a very nice looking functionality for it.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">    <span style="color: #007700">&lt;h1</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;text-center page-header text-info&quot;</span><span style="color: #007700">&gt;</span>Browse Products<span style="color: #007700">&lt;/h1&gt;</span>
+        foreach (var item in Model.Product.Skip(0).Take(10))
+        {
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-sm-4&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;text-align:center; padding-bottom:25px;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;figure</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;figure&quot;</span><span style="color: #007700">&gt;</span>
+                    @foreach (var item2 in item.ProductProductPhotoes)
+                    {
+                           <span style="color: #007700">&lt;img</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;data:image;base64,@System.Convert.ToBase64String(item2.ProductPhoto.ThumbNailPhoto)&quot;</span>  <span style="color: #007700">/&gt;</span>
+                    }
+                <span style="color: #007700">&lt;figcaption</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;figure-caption&quot;</span><span style="color: #007700">&gt;</span>
+                    <span style="color: #007700">&lt;strong&gt;</span>@Html.ActionLink(item.Name, &quot;Details&quot;, new { id = item.ProductID })<span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;&lt;/strong&gt;</span>
+                    <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-primary&quot;</span><span style="color: #007700">&gt;&lt;text&gt;&lt;strong&gt;</span><span style="color: #880000; font-weight: bold">&amp;#36;</span> <span style="color: #007700">&lt;/strong&gt;&lt;/text&gt;</span> @item.StandardCost<span style="color: #007700">&lt;/button&gt;</span>
+                <span style="color: #007700">&lt;/figcaption&gt;</span>
+            <span style="color: #007700">&lt;/figure&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+        }
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;col-lg-12&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;clear:both; text-align:center;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;ul</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;pagination pagination-lg&quot;</span><span style="color: #007700">&gt;</span>
+                <span style="color: #007700">&lt;li&gt;&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;#&quot;</span><span style="color: #007700">&gt;</span>«<span style="color: #007700">&lt;/a&gt;&lt;/li&gt;</span>
+                @{var count = 1;}
+                @while (count <span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>= ViewBag.Count + 1) {
+                        <span style="color: #007700">&lt;li&gt;</span>@Html.ActionLink(count.ToString(), &quot;Details&quot;)<span style="color: #007700">&lt;/li&gt;</span>
+                        count =count + 1;
+                 }
+                <span style="color: #007700">&lt;li&gt;&lt;a</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;#&quot;</span><span style="color: #007700">&gt;</span>»<span style="color: #007700">&lt;/a&gt;&lt;/li&gt;</span>  
+            <span style="color: #007700">&lt;/ul&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+        </pre></div>
+        
+        <h2>Details</h2>
+        
+        <p>Finally, its time to present a view of the individual products after they are selected. This was frustrating because the SQL was difficult to get to cooperate since the Find operation refused to work. I did finally conquer it but the bulk of my time on this project was divided between this and the Index.</p>
+        
+        <!--Code Snippet-->
+            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;container&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;text-align:center; width:300px; background-color:aliceblue;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;h2</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span>@ViewBag.pName<span style="color: #007700">&lt;/h2&gt;</span>
+            <span style="color: #007700">&lt;h4&gt;&lt;img</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;@imgSrc&quot;</span> <span style="color: #FF0000; background-color: #FFAAAA">;</span> <span style="color: #007700">/&gt;&lt;/h4&gt;</span>
+            <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-primary&quot;</span><span style="color: #007700">&gt;</span>$@ViewBag.pCost<span style="color: #007700">&lt;/button&gt;</span>
+            <span style="color: #007700">&lt;hr</span> <span style="color: #007700">/&gt;</span>
+            <span style="color: #007700">&lt;h4&gt;&lt;strong&gt;</span>Color: <span style="color: #007700">&lt;/strong&gt;</span> @ViewBag.pColor<span style="color: #007700">&lt;/h4&gt;</span>
+            <span style="color: #007700">&lt;h4&gt;&lt;strong&gt;</span>Size: <span style="color: #007700">&lt;/strong&gt;</span> @ViewBag.pSize @ViewBag.pUM<span style="color: #007700">&lt;/h4&gt;</span>
+            <span style="color: #007700">&lt;h4&gt;&lt;strong&gt;</span>Weight: <span style="color: #007700">&lt;/strong&gt;</span> @ViewBag.pWeight lbs<span style="color: #007700">&lt;/h4&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+        </pre></div>
+
+        <h2>Reviews</h2>
+        
+        <p>The struggle was still real when I reached this. After many failed attempts, a fellow student (Jake Hatfeild) helped bail me out. As a result, this section is almost entirely credited to him and his talents with JQuery.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;container&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;width:300px;&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-info&quot;</span> <span style="color: #0000CC">onclick=</span><span style="background-color: #fff0f0">&quot;toggleElementVisibilty(&#39;reviewFormDiv&#39;);&quot;</span><span style="color: #007700">&gt;</span>Write a Reveiw!<span style="color: #007700">&lt;/button&gt;</span>
+        <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;btn btn-info&quot;</span> <span style="color: #0000CC">onclick=</span><span style="background-color: #fff0f0">&quot;toggleElementVisibilty(&#39;reviewsDiv&#39;);&quot;</span><span style="color: #007700">&gt;</span>Read Reviews<span style="color: #007700">&lt;/button&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+
+        <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span>      <span style="background-color: #fff0f0">&quot;container&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;text-align:center; width:400px; background-color:aliceblue;&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;reviewsDiv&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;display:none;&quot;</span><span style="color: #007700">&gt;</span>
+            @foreach (var item in Model.PReveiw)
+            {
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;strong</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span>@Html.DisplayFor(modelItem =&gt; item.ReviewerName) <span style="color: #007700">&lt;/strong&gt;</span>
+                    <span style="color: #007700">&lt;em</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue&quot;</span><span style="color: #007700">&gt;</span>(@Html.DisplayFor(modelItem =&gt; item.EmailAddress))<span style="color: #007700">&lt;/em&gt;</span> 
+                    <span style="color: #007700">&lt;strong</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span>Rating: <span style="color: #007700">&lt;/strong&gt;</span> @Html.DisplayFor(modelItem =&gt; item.Rating) <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;strong</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span>Date: <span style="color: #007700">&lt;/strong&gt;</span> @Html.DisplayFor(modelItem =&gt; item.ReviewDate). <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+                    <span style="color: #007700">&lt;strong</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span> Comments: <span style="color: #007700">&lt;/strong&gt;</span> <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span> @Html.DisplayFor(modelItem =&gt; item.Comments)
+                    <span style="color: #007700">&lt;/p&gt;</span>
+            }
+        <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;reviewFormDiv&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;display:none;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;</span>
+            <span style="color: #007700">&lt;form</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;myForm&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;myForm&quot;</span> <span style="color: #0000CC">method=</span><span style="background-color: #fff0f0">&quot;post&quot;</span><span style="color: #007700">&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;id&quot;</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;number&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;@ViewBag.ID&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;display:none&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;name&quot;</span><span style="color: #007700">&gt;</span>Name:<span style="color: #007700">&lt;/label&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;name&quot;</span> <span style="color: #0000CC">maxlength=</span><span style="background-color: #fff0f0">&quot;50&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/p&gt;</span>
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;email&quot;</span><span style="color: #007700">&gt;</span>Email:<span style="color: #007700">&lt;/label&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;email&quot;</span> <span style="color: #0000CC">maxlength=</span><span style="background-color: #fff0f0">&quot;50&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/p&gt;</span>
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;rating&quot;</span><span style="color: #007700">&gt;</span>Rating (1 to 5 scale):<span style="color: #007700">&lt;/label&gt;</span>
+                    <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;number&quot;</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;rating&quot;</span> <span style="color: #0000CC">min=</span><span style="background-color: #fff0f0">&quot;1&quot;</span> <span style="color: #0000CC">max=</span><span style="background-color: #fff0f0">&quot;5&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;/p&gt;</span>
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;label</span> <span style="color: #0000CC">for=</span><span style="background-color: #fff0f0">&quot;comments&quot;</span><span style="color: #007700">&gt;</span>Comments:<span style="color: #007700">&lt;/label&gt;</span>
+                    <span style="color: #007700">&lt;textarea</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;comments&quot;</span> <span style="color: #0000CC">form=</span><span style="background-color: #fff0f0">&quot;myForm&quot;</span> <span style="color: #0000CC">maxlength=</span><span style="background-color: #fff0f0">&quot;3850&quot;</span><span style="color: #007700">&gt;&lt;/textarea&gt;</span>
+                <span style="color: #007700">&lt;/p&gt;</span>
+                <span style="color: #007700">&lt;button</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;submit&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:dodgerblue;&quot;</span><span style="color: #007700">&gt;</span>Submit Review<span style="color: #007700">&lt;/button&gt;</span>
+            <span style="color: #007700">&lt;/form&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+
+        <span style="color: #007700">&lt;script&gt;</span>
+            <span style="color: #008800; font-weight: bold">function</span> showReviewForm() {
+                <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&quot;reviewFormDiv&quot;</span>).style <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;display:block&quot;</span>;
+            }
+
+            <span style="color: #008800; font-weight: bold">function</span> checkForReviews() {
+                <span style="color: #008800; font-weight: bold">var</span> element <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&quot;reviewsDiv&quot;</span>);
+
+                <span style="color: #008800; font-weight: bold">if</span> (element.innerHTML.trim() <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;&quot;</span>) {
+                    element.innerHTML <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;&lt;h3&gt;There are no reviews to display&lt;/h3&gt;&quot;</span>;
+                }
+            }
+
+            <span style="color: #008800; font-weight: bold">function</span> toggleElementVisibilty(elementId) {
+                <span style="color: #008800; font-weight: bold">var</span> element <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(elementId);
+
+                <span style="color: #008800; font-weight: bold">if</span> (element.style.display <span style="color: #333333">==</span> <span style="background-color: #fff0f0">&quot;none&quot;</span>) {
+                    element.style.display <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;block&quot;</span>;
+                }
+                <span style="color: #008800; font-weight: bold">else</span> {
+                    element.style.display <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;none&quot;</span>;
+                }
+            }
+        <span style="color: #007700">&lt;/script&gt;</span>
+        </pre></div>
+        
+        <h2>Note: The Images</h2>
+
+        <p>While it wasn't required, I did tackle presenting them. Due to the combined efforts of several classmates (Jake, Aaron and Stephen) I did manage to get a converter that allowed me to show the information - though I did require two different ways between pages since only one needs a foreach loop.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #FF0000; background-color: #FFAAAA">@</span>{ 
+        <span style="color: #333399; font-weight: bold">var</span> base64 = Convert.ToBase64String(ViewBag.pPhoto);
+        <span style="color: #333399; font-weight: bold">var</span> imgSrc = String.Format(<span style="background-color: #fff0f0">&quot;data:image/gif;base64,{0}&quot;</span>, base64);
+        }
+        </pre></div>
+
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">@foreach (var item2 in item.ProductProductPhotoes)
+                {
+                       <span style="color: #007700">&lt;img</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;data:image;base64,@System.Convert.ToBase64String(item2.ProductPhoto.ThumbNailPhoto)&quot;</span>  <span style="color: #007700">/&gt;</span>
+                }
+                </pre></div>
+
+        <h2>Note: The Images</h2>
+        <p>For this projecct I am also required to show it working propperly so here are the screenshots for that: </p>
+        
+        <!--Screen Shots-->
+        <img src="homework6/Content/Images/index_start.PNG">
+        <img src="homework6/Content/Images/index_open.PNG">
+        <img src="homework6/Content/Images/browse_pagination.PNG">
+        <img src="homework6//Content/Images/details_start.PNG">
+        <img src="homework6/Content/Images/details_write.PNG">
+        <img src="homework6/Content/Images/details_read.PNG">
+    </div>
+</div>
+</body>
+</html>
