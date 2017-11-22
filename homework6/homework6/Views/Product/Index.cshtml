@@ -6,12 +6,14 @@
 <!--Navigation-->
 <div class="col-md-12">
     <p>
+        <!--For Each loop to go over Categories-->
         @foreach (var item in Model.ProductCategoriesName)
         {
             <strong>@Html.ActionLink(item.Name, "Index", new { id = item.ProductCategoryID })</strong>
             <text><strong> &#187; </strong></text>
             if (ViewBag.ID != null)
             {
+                <!--For Each loop to go over Subcategories-->
                 foreach (var item2 in item.ProductSubcategories)
                 {
                     if (item2.ProductCategoryID == ViewBag.ID)
@@ -24,6 +26,7 @@
     </p>
 </div>
 
+<!--If Reveiw submission is successful, redirect here and say so.-->
 @if (ViewBag.Success != null)
 {
     <p> You have successfully submitted your Reveiw! </p>
