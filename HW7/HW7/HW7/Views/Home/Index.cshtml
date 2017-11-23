@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!--API KEY: szNwzXJMm8DEiyzh7v71vG5V0e3rXwpw-->
+<div class="container" style="background-color:darkgray;padding-bottom:50px;">
+    <div class="jumbotron" style="text-align:center; color:white; background-color:darkgray;">
+        <h1>Search for Gifs</h1>
+    </div>
+
+    <div class="row" style="text-align:center;">
+        <form>
+            <p>
+                <strong style="color:white;">
+                    Sort By Rating?
+                </strong>
+                <label style="color:dimgrey;">
+                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" checked="checked">All
+                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="y">Y
+                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="g">G
+                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="pg">PG
+                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="pg-13">PG-13
+                </label>
+            </p>
+            <input type="text" id="userQuery" />
+            <input type="button" id="Search" class="Search" value="Search" />
+        </form>
+    </div> <br /><br />
+    <body>
+        <main id="searchResults"></main>
+    </body>
+</div>
+<img src="~/Content/Images/PoweredBy_200px-White_HorizText.png" />
+
+@Scripts.Render("~/Scripts/webAPI.js");
