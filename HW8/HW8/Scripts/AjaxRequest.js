@@ -4,10 +4,11 @@ $(document).ready(function () {
     function callFunction(genre) {
         $("#list").empty();//Clear old data before ajax
         console.log('clicked');
+
         $.ajax({
-            url: "Artists/GetGenre/",
+            url: '@URL.Action("GetGenre")',
             type: 'POST',
-            data: { genre: genre },
+            data: {'Name': 'Tesselation' },
             success: function (data) {
                 console.log('success?');
                 var table = $("#list");
@@ -19,5 +20,7 @@ $(document).ready(function () {
                 alert('There was an error.');
             }
         });
-   }
+
+    };
+
 });
