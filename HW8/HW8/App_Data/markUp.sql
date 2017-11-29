@@ -23,7 +23,7 @@ VALUES
 	(02, 'Portrait'), 
 	(03, 'Renaissance');
 
-INSERT INTO Classification(ClassID, ArtworkID, GenreID)
+INSERT INTO Classification(ClassificationID, ArtworkID, GenreID)
 VALUES
 	(00, 00, 00), 
 	(01, 01, 00),

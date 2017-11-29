@@ -4,8 +4,18 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<script>
+  $(document).ready(function() {
+      $("#Birthdate").datepicker({
+          dateFormat:"dd-mm-yy",
+          minDate: -0,
+          maxDate: "+0M +0D"
 
+      });
+  });
+</script>
+
+<h2>Create</h2>
 
 @using (Html.BeginForm()) 
 {

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HW8.Models;
+using System.Collections;
 
 namespace HW8.Controllers
 {
@@ -17,7 +18,25 @@ namespace HW8.Controllers
         // GET: Artists
         public ActionResult Index()
         {
-            return View(db.Artists.ToList());
+            return View(db.Genres.ToList());
+        }
+
+        //https://stackoverflow.com/questions/25304610/how-to-get-a-list-from-mvc-controller-to-view-using-jquery-ajax
+        // POST: Artists/Genre
+        [HttpPost]
+        public JsonResult GetGenre(string genre)
+        {
+                var artwork = db.Genres.Find(genre).Classifications.ToList().OrderBy(t => t.Artwork.Title).Select(a => new { aw = a.ArtworkID, awa = a.Artwork.ArtworkID }).ToList();
+                string[] artworkArtist = new string[artwork.Count()];
+                for (int i = 0; i < artworkArtist.Length; ++i)
+                {
+                    artworkArtist[i] = $"<td>{db.Artworks.Find(artwork[i].aw).Title}</td><td>{db.Artists.Find(artwork[i].awa).Name}</td>";
+                }
+                var data = new
+                {
+                    arr = artworkArtist
+                };
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Artists
