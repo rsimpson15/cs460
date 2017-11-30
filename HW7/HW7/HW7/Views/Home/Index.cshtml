@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<script src="~/Scripts/webAPI.js"></script>
 
-<!--API KEY: szNwzXJMm8DEiyzh7v71vG5V0e3rXwpw-->
 <div class="container" style="background-color:darkgray;padding-bottom:50px;">
     <div class="jumbotron" style="text-align:center; color:white; background-color:darkgray;">
         <h1>Search for Gifs</h1>
@@ -23,13 +23,11 @@
                 </label>
             </p>
             <input type="text" id="userQuery" />
-            <input type="button" id="Search" class="Search" value="Search" />
+            <input type="button" id="Search" class="Search" value="Search" onclick="searchResults();" />
         </form>
-    </div> <br /><br />
-    <body>
+        <br /><br />
         <main id="searchResults"></main>
-    </body>
+    </div>
 </div>
 <img src="~/Content/Images/PoweredBy_200px-White_HorizText.png" />
 
-@Scripts.Render("~/Scripts/webAPI.js");

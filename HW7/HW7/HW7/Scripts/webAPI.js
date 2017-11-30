@@ -1,34 +1,29 @@
-﻿// Wait for Page Load
-$(document).ready(function () {
+﻿function searchResults() {
+    var searchTerms = document.getElementById('userQuery').value.trim();
+    var output = document.getElementById('searchResults');
 
-    // Run Query on click of Search button
-    $('#Search').on('click', function () {
+    if (searchTerms !== null || searchTerms !== "") {
+        var rating = null;
+        var element = null;
+        var termString = searchTerms.split(" ").join('+'); //change spaces to - as Giphy does on their site
+        console.log(termString);
 
-        var api = 'http://api.giphy.com/v1/gifs/search?q='; //API url & end pt
-        var userInput = $('#userQuery').val().trim(); //User Query
-        userInput = userInput.replace(/ /g, "+"); //Convert
-        var limit = '&limit=24'; //Display Limit
-        var key = '&api_key=szNwzXJMm8DEiyzh7v71vG5V0e3rXwpw'; //API Key --> Replace with ViewBag.apiKey when I solve this error
+        // get the rating value
+        rating = $("#rating").val();
 
-        // Create the data string (API Url + Query + API Key + Data Limit)
-        var queryURL = api + userInput + key + limit;
-        console.log(queryUrl);
-        // Part 2 - Use AJAX to call GIPHY API 
+        // Clear the html before appending new results
+        $('#searchResults').html(null);
+
         $.ajax({
-            url: queryURL, //Url 
-            method: 'GET', //Method Type
-            dataType: 'json', //Type Gotten Back
-            success: function (giphy) { //On Success, Return Images
-                giphy.data.forEach(function (gif) {
-                    $('#searchResults').append('<img src="${gif.images.fixed_height.url}">');
-                });
-            },
-            error: errorReport
+            url: "/Search/",
+            type: "POST",
+            data: { termString: termString, topResult: topResult, rating: rating },
+            success: function (returnData) { //On Success, Return Images into a grid 
+                returnData.data.forEach(function (item) {
+                    $('#searchResults').append(`<div class="col-lg-4 imgDiv"><img src="${item.images.fixed_height.url}" class="col-lg -4 imgClass"></div>`);
+                }
+                );
+            }
         });
-    });
-
-    function errorReport() {
-        console.log("Something has gone wrong, better luck next time!");
-        return false;
     }
-});
+}
