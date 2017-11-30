@@ -35,7 +35,7 @@
             <p>&copy; @DateTime.Now.Year - Art Gallery</p>
         </footer>
     </div>
-    @Scripts.Render("~/Scripts/AjaxRequest.js")
+    @RenderSection("PageScripts", false)
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
