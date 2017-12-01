@@ -15,12 +15,11 @@ namespace HW8.Models
             Artworks = new HashSet<Artwork>();
         }
 
-        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ArtistID { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
+        [StringLength(150)]
         public string Name { get; set; }
 
         public DateTime Birthdate { get; set; }

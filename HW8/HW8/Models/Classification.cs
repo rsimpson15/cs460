@@ -9,13 +9,12 @@ namespace HW8.Models
     [Table("Classification")]
     public partial class Classification
     {
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ClassID { get; set; }
+        public int ClassificationID { get; set; }
 
-        public int? ArtworkID { get; set; }
+        public int ArtworkID { get; set; }
 
-        public int? GenreID { get; set; }
+        public int GenreID { get; set; }
 
         public virtual Artwork Artwork { get; set; }
 

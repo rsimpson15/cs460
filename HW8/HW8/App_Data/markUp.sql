@@ -30,7 +30,7 @@ CREATE TABLE [dbo].[Genre] (
 CREATE TABLE [dbo].[Classification] (
     [ClassificationID] INT NOT NULL,
     [ArtworkID]        INT NOT NULL,
-    [GenreID]        NVARCHAR (50) NOT NULL,
+    [GenreID]       INT NOT NULL,
     PRIMARY KEY CLUSTERED ([ClassificationID] ASC),
     FOREIGN KEY ([ArtworkID]) REFERENCES [dbo].[Artwork] ([ArtworkID])
 		ON DELETE CASCADE
@@ -42,35 +42,35 @@ CREATE TABLE [dbo].[Classification] (
 
 INSERT INTO Artist(ArtistID, Name, Birthdate, BirthCountry, BirthCity)
 VALUES
-	(00, 'M.C. Esher', 07/17/1898, 'Netherlands', 'Leeuwarden'),
-	(01, 'Leonardo Da Vinci', 05/02/1591, 'Italy', 'Vinci'),
-	(02, 'Hatip Mehmed Efendi', 11/18/1680, 'Unknown', 'Unknown'),
-	(03, 'Salvador Dali', 05/11/1904, 'Spain', 'Figueres');
+	('1', 'M.C. Esher', 07/17/1898, 'Netherlands', 'Leeuwarden'),
+	('2', 'Leonardo Da Vinci', 05/02/1591, 'Italy', 'Vinci'),
+	('3', 'Hatip Mehmed Efendi', 11/18/1680, 'Unknown', 'Unknown'),
+	('4', 'Salvador Dali', 05/11/1904, 'Spain', 'Figueres');
 
 INSERT INTO Artwork(ArtworkID, ArtistID, Title)
 VALUES
-	(00, 00, 'Circle Limit III'),
-	(01, 00, 'Twon Tree'), 
-	(02, 01, 'Mona Lisa'), 
-	(03, 01, 'The Vitruvian Man'), 
-	(04, 02, 'Ebru'),
-	(05,03, 'Honey Is Sweeter Than Blood');
+	('1', '1', 'Circle Limit III'),
+	('2', '1', 'Twon Tree'), 
+	('3', '2', 'Mona Lisa'), 
+	('4', '2', 'The Vitruvian Man'), 
+	('5', '3', 'Ebru'),
+	('6', '4', 'Honey Is Sweeter Than Blood');
 
 INSERT INTO Genre(GenreID, Name)
 VALUES
-	(00, 'Tesselation'), 
-	(01, 'Surrealism'), 
-	(02, 'Portrait'), 
-	(03, 'Renaissance');
+	('1', 'Tesselation'), 
+	('2', 'Surrealism'), 
+	('3', 'Portrait'), 
+	('4', 'Renaissance');
 
 INSERT INTO Classification(ClassificationID, ArtworkID, GenreID)
 VALUES
-	(00, 00, 00), 
-	(01, 01, 00),
-	(02, 01, 01), 
-	(03, 02, 02), 
-	(04, 02, 03), 
-	(05, 03, 03), 
-	(06, 04, 00), 
-	(07, 05, 01);
+	('1', '1', '1'), 
+	('2', '2', '1'),
+	('3', '2', '2'), 
+	('4', '3', '3'), 
+	('5', '3', '4'), 
+	('6', '4', '4'), 
+	('7', '5', '1'), 
+	('8', '6', '2');
 	

@@ -8,7 +8,7 @@ namespace HW8.Models
     public partial class ArtGallery : DbContext
     {
         public ArtGallery()
-            : base("name=ArtGallery")
+            : base("name=ArtGalleryDB")
         {
         }
 
@@ -19,10 +19,6 @@ namespace HW8.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Artist>()
-                .HasMany(e => e.Artworks)
-                .WithRequired(e => e.Artist)
-                .WillCascadeOnDelete(false);
         }
     }
 }

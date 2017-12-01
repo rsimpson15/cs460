@@ -212,7 +212,7 @@
     <Content Include="Views\Artists\Edit.cshtml" />
     <Content Include="Views\Artists\Index.cshtml" />
     <Content Include="Views\Artists\Artists.cshtml" />
-    <Content Include="Views\Artists\Artwork.cshtml" />
+    <Content Include="Views\Artists\Artworks.cshtml" />
     <Content Include="Views\Artists\Classifications.cshtml" />
   </ItemGroup>
   <ItemGroup />
