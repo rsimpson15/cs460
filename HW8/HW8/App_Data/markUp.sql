@@ -1,7 +1,5 @@
 ﻿/*MARK UP for DATABASE*/
 
-USE [C:\USERS\ROCHELLE SIMPSON\DOCUMENTS\CS460\HW8\HW8\APP_DATA\ARTGALLERYDB.MDF];  
-
 CREATE TABLE [dbo].[Artist] (
     [ArtistID]     INT            NOT NULL,
     [Name]         NVARCHAR (150) NOT NULL,
@@ -42,35 +40,35 @@ CREATE TABLE [dbo].[Classification] (
 
 INSERT INTO Artist(ArtistID, Name, Birthdate, BirthCountry, BirthCity)
 VALUES
-	('1', 'M.C. Esher', 07/17/1898, 'Netherlands', 'Leeuwarden'),
-	('2', 'Leonardo Da Vinci', 05/02/1591, 'Italy', 'Vinci'),
-	('3', 'Hatip Mehmed Efendi', 11/18/1680, 'Unknown', 'Unknown'),
-	('4', 'Salvador Dali', 05/11/1904, 'Spain', 'Figueres');
+	(1, 'M.C. Esher', 07/17/1898, 'Netherlands', 'Leeuwarden'),
+	(2, 'Leonardo Da Vinci', 05/02/1591, 'Italy', 'Vinci'),
+	(3, 'Hatip Mehmed Efendi', 11/18/1680, 'Unknown', 'Unknown'),
+	(4, 'Salvador Dali', 05/11/1904, 'Spain', 'Figueres');
 
 INSERT INTO Artwork(ArtworkID, ArtistID, Title)
 VALUES
-	('1', '1', 'Circle Limit III'),
-	('2', '1', 'Twon Tree'), 
-	('3', '2', 'Mona Lisa'), 
-	('4', '2', 'The Vitruvian Man'), 
-	('5', '3', 'Ebru'),
-	('6', '4', 'Honey Is Sweeter Than Blood');
+	(1, 1, 'Circle Limit III'),
+	(2, 1, 'Twon Tree'), 
+	(3, 2, 'Mona Lisa'), 
+	(4, 2, 'The Vitruvian Man'), 
+	(5, 3, 'Ebru'),
+	(6, 4, 'Honey Is Sweeter Than Blood');
 
 INSERT INTO Genre(GenreID, Name)
 VALUES
-	('1', 'Tesselation'), 
-	('2', 'Surrealism'), 
-	('3', 'Portrait'), 
-	('4', 'Renaissance');
+	(1, 'Tesselation'), 
+	(2, 'Surrealism'), 
+	(3, 'Portrait'), 
+	(4, 'Renaissance');
 
 INSERT INTO Classification(ClassificationID, ArtworkID, GenreID)
 VALUES
-	('1', '1', '1'), 
-	('2', '2', '1'),
-	('3', '2', '2'), 
-	('4', '3', '3'), 
-	('5', '3', '4'), 
-	('6', '4', '4'), 
-	('7', '5', '1'), 
-	('8', '6', '2');
+	(1, 1, 1), 
+	(2, 2, 1),
+	(3, 2, 2), 
+	(4, 3, 3), 
+	(5, 3, 4), 
+	(6, 4, 4), 
+	(7, 5, 1), 
+	(8, 6, 2);
 	
