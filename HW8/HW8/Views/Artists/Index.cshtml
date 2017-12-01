@@ -4,6 +4,11 @@
     ViewBag.Title = "Index";
 }
 
+@section PageScripts
+{
+    <script type="text/javascript" src="~/Scripts/AjaxRequest.js"></script>
+}
+
 
 <div class="jumbotron" style="text-align:center; color:white; background-color:darkgray;">
     <h2>Welcome to the Artist Gallery</h2>
@@ -18,9 +23,4 @@
         <button class="btn-group" onclick="callFunction('@item.Name');">@Html.DisplayFor(model => item.Name)</button>
         <table id="list"></table>
     </div>
-}
-
-@section PageScripts
-{
-    <script type="text/javascript" src="~/Scripts/AjaxRequest.js"></script>
 }

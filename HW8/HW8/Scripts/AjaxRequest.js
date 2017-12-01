@@ -2,13 +2,13 @@
     $("#list").empty();//Clear old data before ajax
 
     $.ajax({
-        url: '@URL.Action("GetGenre")',
+        url: 'Artists/GetGenre',
         type: 'POST',
         data: { 'Name': 'Tesselation' },
         success: function (data) {
             console.log('success?');
             var table = $("#list");
-            returnData.arr.forEach(data, function (elem) {
+            $.each(data, function (elem) {
                 $('#list').append(item);
             });
         },

@@ -26,8 +26,8 @@ namespace HW8.Controllers
         [HttpPost]
         public JsonResult GetGenre(string genre)
         {
-                var artwork = db.Genres.Find(genre).Classifications.ToList().OrderBy(t => t.Artwork.Title).Select(a => new { aw = a.ArtworkID, awa = a.Artwork.ArtworkID }).ToList();
-                string[] artworkArtist = new string[artwork.Count()];
+                var artwork = db.Genres.FirstOrDefault(n => n.GenreName == genre).Classifications.ToList().OrderBy(t => t.Artwork.Title).Select(a => new { aw = a.ArtworkID, awa = a.Artwork.ArtworkID }).ToList();
+            string[] artworkArtist = new string[artwork.Count()];
                 for (int i = 0; i < artworkArtist.Length; ++i)
                 {
                     artworkArtist[i] = $"<td>{db.Artworks.Find(artwork[i].aw).Title}</td><td>{db.Artists.Find(artwork[i].awa).Name}</td>";
