@@ -29,7 +29,7 @@ namespace HW8.Controllers
             string[] artworkArtist = new string[artwork.Count()];
             for (int i = 0; i < artworkArtist.Length; ++i)
             {
-                artworkArtist[i] = $"<td>{db.Artworks.Find(artwork[i].aw).Title}</td><td>{db.Artists.Find(artwork[i].awa).Name}</td>";
+                artworkArtist[i] = $"<td>{db.Artworks.Where(aw => aw.ArtworkID == artwork[i].aw).Select(a => a.Title).ToList()}</td><td>{db.Artists.Where(awa => awa.ArtistID == artwork[i].awa).Select(a => a.Name).ToList()}</td>";
             }
             var data = new
             {
