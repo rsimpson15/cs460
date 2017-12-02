@@ -4,7 +4,7 @@
     $.ajax({
         url: 'Artists/GetGenre',
         type: 'POST',
-        data: { 'Name': 'Tesselation' },
+        data: { 'genre': 'genre' },
         success: function (data) {
             console.log('success?');
             var table = $("#list");

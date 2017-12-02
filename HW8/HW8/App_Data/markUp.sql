@@ -3,7 +3,7 @@
 CREATE TABLE [dbo].[Artist] (
     [ArtistID]     INT            NOT NULL,
     [Name]         NVARCHAR (150) NOT NULL,
-    [Birthdate]    DATETIME       NOT NULL,
+    [Birthdate]    DATE       NOT NULL,
     [BirthCountry] NVARCHAR (150) NOT NULL,
     [BirthCity]    NVARCHAR (100) NOT NULL,
     PRIMARY KEY CLUSTERED ([ArtistID] ASC)
@@ -40,10 +40,10 @@ CREATE TABLE [dbo].[Classification] (
 
 INSERT INTO Artist(ArtistID, Name, Birthdate, BirthCountry, BirthCity)
 VALUES
-	(1, 'M.C. Esher', 07/17/1898, 'Netherlands', 'Leeuwarden'),
-	(2, 'Leonardo Da Vinci', 05/02/1591, 'Italy', 'Vinci'),
-	(3, 'Hatip Mehmed Efendi', 11/18/1680, 'Unknown', 'Unknown'),
-	(4, 'Salvador Dali', 05/11/1904, 'Spain', 'Figueres');
+	(1, 'M.C. Esher', '07/17/1898', 'Netherlands', 'Leeuwarden'),
+	(2, 'Leonardo Da Vinci', '05/02/1591', 'Italy', 'Vinci'),
+	(3, 'Hatip Mehmed Efendi', '11/18/1680', 'Unknown', 'Unknown'),
+	(4, 'Salvador Dali', '05/11/1904', 'Spain', 'Figueres');
 
 INSERT INTO Artwork(ArtworkID, ArtistID, Title)
 VALUES

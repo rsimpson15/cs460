@@ -22,7 +22,7 @@
 @foreach (var item in Model)
 {
     <div class="col-sm-3">
-        <button class="btn-group" onclick="callFunction('@item.Name');">@Html.DisplayFor(model => item.Name)</button>
+        <button class="btn-group" onclick="callFunction('@item.GenreID');">@Html.DisplayFor(model => item.Name)</button>
         <table id="list"></table>
     </div>
 }
