@@ -1,0 +1,206 @@
+<!DOCTYPE>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Homework 7 </title>
+<link href="WebApplication2/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class = "col-md-4">
+        <h2>Homework 7: </h2> <small>Giphy Web Search</small>
+    </div>
+
+    <div class = "col-md-8">
+        
+        <h2>The Summary</h2>
+        <p>A deceptively simple looking assignment, the goal this time is to use Giphy's Web API to create a search over their image library. The only requirements are that we do so using AJAX to get the data and JSON to parse it. We also need a database to store information about the searches. Sounds easy, right?</p>         
+        
+        <p>WRONG.</p>
+        
+        <h2>Getting the Keys</h2>
+
+        <p>Step one, even before starting much of the project, requires us to get either a public access API key or a private one - I went for the latter. To acquire this requires you to submit some kind of skeleton about your project. I did this with an image submission of my search page. You also have to show you've put their company "stamp" on your page.</p>
+        
+        <!--Images-->
+        <a href="HW7/HW7/Content/Images/proofOFCode.PNG"></a>
+        <a href="HW7/HW7/Content/Images/proofOfStamp.PNG"></a>
+        
+       <h2>Making the Page</h2>
+
+        <p>Designing the actually search page was, of course, the easiest part of this whole affair. I set it up with a feild set for the rating varaible and then a text feild for the input. It is worth noting that it took me quite a quite to figure out just _where_ to place my javascript though. (More on that in the next part.)</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;container&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;background-color:darkgray;padding-bottom:50px;&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;jumbotron&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;text-align:center; color:white; background-color:darkgray;&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;h1&gt;</span>Search for Gifs<span style="color: #007700">&lt;/h1&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+
+        <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;row&quot;</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;text-align:center;&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;form&gt;</span>
+            <span style="color: #007700">&lt;fieldset&gt;</span>
+                <span style="color: #007700">&lt;p&gt;</span>
+                    <span style="color: #007700">&lt;strong</span> <span style="color: #0000CC">style=</span><span style="background-color: #fff0f0">&quot;color:white;&quot;</span><span style="color: #007700">&gt;</span>
+                        Sort By Rating?
+                    <span style="color: #007700">&lt;/strong&gt;</span>
+                    <span style="color: #007700">&lt;select</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;rating&quot;</span><span style="color: #007700">&gt;</span>
+                        <span style="color: #007700">&lt;option</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;Y&quot;</span><span style="color: #007700">&gt;</span>Y<span style="color: #007700">&lt;/option&gt;</span>
+                        <span style="color: #007700">&lt;option</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;G&quot;</span><span style="color: #007700">&gt;</span>G<span style="color: #007700">&lt;/option&gt;</span>
+                        <span style="color: #007700">&lt;option</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;PG&quot;</span><span style="color: #007700">&gt;</span>PG<span style="color: #007700">&lt;/option&gt;</span>
+                        <span style="color: #007700">&lt;option</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;PG-13&quot;</span><span style="color: #007700">&gt;</span>PG-13<span style="color: #007700">&lt;/option&gt;</span>
+                    <span style="color: #007700">&lt;/select&gt;</span>
+                <span style="color: #007700">&lt;/p&gt;</span>
+            <span style="color: #007700">&lt;/fieldset&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;userQuery&quot;</span> <span style="color: #007700">/&gt;</span>
+                <span style="color: #007700">&lt;input</span> <span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;button&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;Search&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;Search&quot;</span> <span style="color: #0000CC">value=</span><span style="background-color: #fff0f0">&quot;Search&quot;</span> <span style="color: #0000CC">onclick=</span><span style="background-color: #fff0f0">&quot;searchResults();&quot;</span> <span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;/form&gt;</span>
+        <span style="color: #007700">&lt;br</span> <span style="color: #007700">/&gt;&lt;br</span> <span style="color: #007700">/&gt;</span>
+        <span style="color: #007700">&lt;main</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;searchResults&quot;</span><span style="color: #007700">&gt;&lt;/main&gt;</span>
+            <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;/div&gt;</span>
+        <span style="color: #007700">&lt;img</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;~/Content/Images/PoweredBy_200px-White_HorizText.png&quot;</span> <span style="color: #007700">/&gt;</span>
+        </pre></div>
+
+        <h2>Javascript, JSON & AJAX</h2>
+
+        <p>Honest confession, I've never touched AJAX in my life and my expereince with Javascript up to this point was mostly about web page beautification - not server correspondence. This meant I was pretty out of my depth when I dived into this portion of the project.</p>
+        <p> My first struggle was where the Javascript should even go. I thought, since the AJAX call wasn't particularly large, I could put it on my webpage. However, since the layout page is shared and loads first that meant it was overwriting my call before it even got a chance. Instead, I needed to place the following header on the View page: </p>
+            
+        <!--Code Snippet-->    
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">@section PageScripts
+        {
+            <span style="color: #007700">&lt;script </span><span style="color: #0000CC">type=</span><span style="background-color: #fff0f0">&quot;text/javascript&quot;</span> <span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;~/Scripts/webAPI.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+        }
+        </pre></div>
+        
+        <p>And then this one on the layout page: </p>
+            
+        <!--Code Snippet-->
+            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #3333BB">@RenderSection</span>(<span style="background-color: #fff0f0">&quot;PageScripts&quot;</span>, <span style="color: #AA6600">required</span>: <span style="color: #003388; font-weight: bold">false</span>)
+            </pre></div>
+
+        <p>Key note about the above, it needs to be the first one loaded on the layout page!</p>
+            
+        <p>Once that was accomplished I created my AJAX call.</p>
+            
+        <!--Code Snippet-->
+            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> searchResults() {
+
+            <span style="color: #008800; font-weight: bold">var</span> searchTerms <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;userQuery&#39;</span>).value.trim();
+            <span style="color: #008800; font-weight: bold">var</span> output <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;searchResults&#39;</span>);
+
+            <span style="color: #008800; font-weight: bold">if</span> (searchTerms <span style="color: #333333">!==</span> <span style="color: #008800; font-weight: bold">null</span> <span style="color: #333333">||</span> searchTerms <span style="color: #333333">!==</span> <span style="background-color: #fff0f0">&quot;&quot;</span>) {
+                <span style="color: #008800; font-weight: bold">var</span> rating <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">null</span>;
+                <span style="color: #008800; font-weight: bold">var</span> termString <span style="color: #333333">=</span> searchTerms.split(<span style="background-color: #fff0f0">&quot; &quot;</span>).join(<span style="background-color: #fff0f0">&#39;+&#39;</span>); <span style="color: #888888">//change spaces to - as Giphy does on their site</span>
+                console.log(termString);
+
+                <span style="color: #888888">// get the rating value</span>
+                rating <span style="color: #333333">=</span> $(<span style="background-color: #fff0f0">&quot;#rating&quot;</span>).val();
+                console.log(rating);
+
+                <span style="color: #888888">// Clear the html before appending new results</span>
+                $(<span style="background-color: #fff0f0">&#39;#searchResults&#39;</span>).html(<span style="color: #008800; font-weight: bold">null</span>);
+
+                $.ajax({
+                    url<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/Home/Index/&quot;</span>,
+                    type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;POST&quot;</span>,
+                    data<span style="color: #333333">:</span> { <span style="background-color: #fff0f0">&#39;termString&#39;</span><span style="color: #333333">:</span> termString, <span style="background-color: #fff0f0">&#39;rating&#39;</span><span style="color: #333333">:</span> rating },
+                    success<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">function</span> (returnData) { <span style="color: #888888">//On Success, Return Images into a grid </span>
+                        $.each(<span style="color: #008800; font-weight: bold">function</span> (item) {
+                            $(<span style="background-color: #fff0f0">&#39;#searchResults&#39;</span>).append(<span style="color: #FF0000; background-color: #FFAAAA">`</span><span style="color: #333333">&lt;</span>div <span style="color: #008800; font-weight: bold">class</span><span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;col-lg-4 imgDiv&quot;</span><span style="color: #333333">&gt;&lt;</span>img src<span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;${item.images.fixed_height.url}&quot;</span> <span style="color: #008800; font-weight: bold">class</span><span style="color: #333333">=</span><span style="background-color: #fff0f0">&quot;col-lg -4 imgClass&quot;</span><span style="color: #333333">&gt;&lt;</span><span style="color: #FF0000; background-color: #FFAAAA">/div&gt;`);</span>
+                        }
+                        );
+                    }
+                });
+            }
+        }
+        </pre></div>
+
+        <p>Now, having tested this with console.log calls and the POSTMAN add-on for Chrome, I know that it gets the data from the user just fine. However, it does not return the desired images in anyway, shape, or form. This is, sadly, where this project fell apart for me. I have fought the following method call in my controller for almost two weeks now. Time is up, the curtain call is out and I had to move on.</p>
+            
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">      <span style="color: #008800; font-weight: bold">private</span> Searches db = <span style="color: #008800; font-weight: bold">new</span> Searches();
+
+        <span style="color: #008800; font-weight: bold">public</span> ActionResult <span style="color: #0066BB; font-weight: bold">Index</span>(<span style="color: #333399; font-weight: bold">string</span> termString, <span style="color: #333399; font-weight: bold">string</span> rating)
+        {
+            <span style="color: #888888">// get the api key from a file outside the repo</span>
+            <span style="color: #333399; font-weight: bold">string</span> apiKey = System.Web.Configuration.WebConfigurationManager.AppSettings[<span style="background-color: #fff0f0">&quot;AppSecrets&quot;</span>];
+            <span style="color: #333399; font-weight: bold">var</span> ratingString = <span style="background-color: #fff0f0">&quot;&amp;rating=&quot;</span> + rating;
+            <span style="color: #333399; font-weight: bold">var</span> topResult = <span style="background-color: #fff0f0">&quot;&amp;limit=20&quot;</span>;
+
+            <span style="color: #888888">// build the requestURL</span>
+            <span style="color: #333399; font-weight: bold">var</span> requestURL = <span style="background-color: #fff0f0">&quot;http://api.giphy.com/v1/gifs/search?q=&quot;</span> + termString + topResult + ratingString + <span style="background-color: #fff0f0">&quot;&amp;api_key=&quot;</span> + apiKey;
+
+            <span style="color: #888888">// build a WebRequest</span>
+            WebRequest request = WebRequest.Create(requestURL);
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = <span style="color: #008800; font-weight: bold">new</span> StreamReader(response.GetResponseStream());
+
+            <span style="color: #888888">// Read the content.  </span>
+            <span style="color: #333399; font-weight: bold">string</span> responseFromServer = reader.ReadToEnd();
+
+            <span style="color: #888888">// Clean up the streams and the response.  </span>
+            reader.Close();
+            response.Close();
+
+            <span style="color: #888888">// Create a JObject, using Newtonsoft NuGet package</span>
+            JObject json = JObject.Parse(responseFromServer);
+
+            <span style="color: #888888">// Create a serializer to deserialize the string response (string in JSON format)</span>
+            JavaScriptSerializer serializer = <span style="color: #008800; font-weight: bold">new</span> JavaScriptSerializer();
+
+            <span style="color: #888888">// Store JSON results in results to be passed back to client (javascript)</span>
+            <span style="color: #333399; font-weight: bold">var</span> results = serializer.DeserializeObject(responseFromServer);
+
+            <span style="color: #888888">// Get Feilds for Database</span>
+            <span style="color: #333399; font-weight: bold">string</span> IPAddress = Request.UserHostAddress;
+            <span style="color: #333399; font-weight: bold">string</span> Browser = Request.UserAgent;
+
+            <span style="color: #888888">//Save data in DB</span>
+            <span style="color: #008800; font-weight: bold">if</span> (ModelState.IsValid)
+            {
+                Search record = <span style="color: #008800; font-weight: bold">new</span> Search();
+                record.SearchTerm = termString;
+                record.SearchDate = DateTime.Now;
+                record.IPAddress = IPAddress;
+                record.Browser = Browser;
+                db.SaveChanges();
+            }
+
+            <span style="color: #888888">// return the Json object</span>
+            <span style="color: #008800; font-weight: bold">return</span> <span style="color: #0066BB; font-weight: bold">Json</span>(results, JsonRequestBehavior.AllowGet);
+        }
+        </pre></div>
+
+        <h2>The Database</h2>
+
+        <p>While the search method might not work, I didn't want to ignore the database requirement since I knew that was something I _could_ do. So I created a new table to store the required information: </p>
+            
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> [dbo].[Searches] (
+            [ID]         <span style="color: #007020">INT</span>            <span style="color: #008800; font-weight: bold">IDENTITY</span> (<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [SearchTerm] NVARCHAR (<span style="color: #0000DD; font-weight: bold">150</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [SearchDate] DATETIME       <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [IPAddress]  NVARCHAR(<span style="color: #0000DD; font-weight: bold">150</span>)            <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [Browser]    NVARCHAR (<span style="color: #0000DD; font-weight: bold">250</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> CLUSTERED ([ID] <span style="color: #008800; font-weight: bold">ASC</span>)
+        );
+        </pre></div>
+
+        <p> And then, as seen above in the Controller code-snippet, I added in the functionality to acquire the data and save it to the database.</p>
+        
+        <h2>Final Thoughts</h2>
+        <p>While this was not an easy project, and I certainly didn't accomplish all I wanted to from it, it was intersting. I would like to finish it someday, to understand the things I currently do not, and revise this one to show what I've learned. Here's to hoping I can do that!</p>
+    </div>
+</div>
+</body>
+</html>
