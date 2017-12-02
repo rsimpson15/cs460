@@ -1,4 +1,5 @@
 ﻿//using Homework7.Models; //required to add the dbcontext class
+using HW7.Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,31 +12,28 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
+
 namespace Homework7.Controllers
 {
     public class SearchController : Controller
     {
 
+        private Searches db = new Searches();
+
         public ActionResult Index(string termString, string rating)
         {
             // get the api key from a file outside the repo
             string apiKey = System.Web.Configuration.WebConfigurationManager.AppSettings["AppSecrets"];
-
             var ratingString = "&rating=" + rating;
+            var topResult = "&limit=20";
 
             // build the requestURL
-            var requestURL = "http://api.giphy.com/v1/gifs/search?q=" + termString + ratingString + "&api_key=" + apiKey;
+            var requestURL = "http://api.giphy.com/v1/gifs/search?q=" + termString + topResult + ratingString + "&api_key=" + apiKey;
 
             // build a WebRequest
             WebRequest request = WebRequest.Create(requestURL);
-
-            // get the response from the WebRequest via the passed URL
             WebResponse response = request.GetResponse();
-
-            // build a Stream AND get the Stream Response
             Stream dataStream = response.GetResponseStream();
-
-            //StreamReader reader = new StreamReader(dataStream);
             StreamReader reader = new StreamReader(response.GetResponseStream());
 
             // Read the content.  
@@ -54,9 +52,20 @@ namespace Homework7.Controllers
             // Store JSON results in results to be passed back to client (javascript)
             var results = serializer.DeserializeObject(responseFromServer);
 
-            // get userIP and userAgent for tracking purposes
-            string userIP = Request.UserHostAddress;
-            string userAgent = Request.UserAgent;
+            // Get Feilds for Database
+            string IPAddress = Request.UserHostAddress;
+            string Browser = Request.UserAgent;
+
+            //Save data in DB
+            if (ModelState.IsValid)
+            {
+                Search record = new Search();
+                record.SearchTerm = termString;
+                record.SearchDate = DateTime.Now;
+                record.IPAddress = IPAddress;
+                record.Browser = Browser;
+                db.SaveChanges();
+            }
 
             // return the Json object
             return Json(results, JsonRequestBehavior.AllowGet);

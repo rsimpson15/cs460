@@ -1,7 +1,11 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-<script src="~/Scripts/webAPI.js"></script>
+
+@section PageScripts
+{
+    <script type="text/javascript" src="~/Scripts/webAPI.js"></script>
+}
 
 <div class="container" style="background-color:darkgray;padding-bottom:50px;">
     <div class="jumbotron" style="text-align:center; color:white; background-color:darkgray;">
@@ -10,20 +14,21 @@
 
     <div class="row" style="text-align:center;">
         <form>
-            <p>
-                <strong style="color:white;">
-                    Sort By Rating?
-                </strong>
-                <label style="color:dimgrey;">
-                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" checked="checked">All
-                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="y">Y
-                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="g">G
-                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="pg">PG
-                    <input type="checkbox" style="margin-left:5px; margin-right:5px;" value="pg-13">PG-13
-                </label>
-            </p>
-            <input type="text" id="userQuery" />
-            <input type="button" id="Search" class="Search" value="Search" onclick="searchResults();" />
+            <fieldset>
+                <p>
+                    <strong style="color:white;">
+                        Sort By Rating?
+                    </strong>
+                    <select id="rating">
+                        <option value="Y">Y</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                    </select>
+                </p>
+            </fieldset>
+                <input type="text" id="userQuery" />
+                <input type="button" id="Search" class="Search" value="Search" onclick="searchResults();" />
         </form>
         <br /><br />
         <main id="searchResults"></main>
