@@ -1,0 +1,233 @@
+<!DOCTYPE>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Homework 8 </title>
+<link href="WebApplication2/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+<link href="WebApplication2/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="container">
+    <div class = "col-md-4">
+        <h2>Homework 8: </h2> <small>Artist Gallery</small>
+    </div>
+
+    <div class = "col-md-8">
+        
+        <h2>The Premise</h2>
+        <p>The project required us to create an art gallery site from scratch with the following requirements:</p>
+
+        <ul>
+            <li>Generate a Database, complete with ER Diagram.</li>
+            <li>Use that to generate the Models.</li>
+            <li>Use the Models to create a CRUD interface.</li>
+            <li>Create a List View for Artists, Artworks & Classifications.</li>
+            <li>Modify the Layout page to reflect our Links, must use Razor loops.</li>
+            <li>Modify the Index page to be a welcome page.</li>
+            <li>Index must have buttons for genres that access the Artworks & Artists in them via an AJAX call.</li>
+        </ul>        
+        
+        <p>Having failed to get Homework 7 fully functional due to my scant undersstanding of AJAX, I was weary at the outset on this one - especially when it was announced that THIS was the exact format for the final.</p>
+        
+        <h2>The Database</h2>
+
+        <p>Admittedly, I love making databases so the first thing I happily rushed to do was draw up my ER Diagram. I had to identify the entities and their relationships before I could write any SQL for it.</p>
+        
+        <img src="HW8/Content/Images/ERdiagram.png">
+        
+        <p>Now that I had that drawn up, it was time to create my tables in SQL. This time I opted to use Visual Studio itself to generate my Database and its code since the functionality is there. </p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> [dbo].[Artist] (
+        [ArtistID]     <span style="color: #007020">INT</span>            <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+        [Name]         NVARCHAR (<span style="color: #0000DD; font-weight: bold">150</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+        [Birthdate]    <span style="color: #007020">DATE</span>       <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+        [BirthCountry] NVARCHAR (<span style="color: #0000DD; font-weight: bold">150</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+        [BirthCity]    NVARCHAR (<span style="color: #0000DD; font-weight: bold">100</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+        <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> CLUSTERED ([ArtistID] <span style="color: #008800; font-weight: bold">ASC</span>)
+        );
+
+        <span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> [dbo].[Artwork] (
+            [ArtworkID] <span style="color: #007020">INT</span>            <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [ArtistID]  <span style="color: #007020">INT</span>            <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [Title]     NVARCHAR (<span style="color: #0000DD; font-weight: bold">100</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> CLUSTERED ([ArtworkID] <span style="color: #008800; font-weight: bold">ASC</span>),
+            <span style="color: #008800; font-weight: bold">FOREIGN</span> <span style="color: #008800; font-weight: bold">KEY</span> ([ArtistID]) <span style="color: #008800; font-weight: bold">REFERENCES</span> [dbo].[Artist] ([ArtistID])
+            <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">DELETE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>
+            <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">UPDATE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>
+        );
+
+        <span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> [dbo].[Genre] (
+            [GenreID] <span style="color: #007020">INT</span> <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [Name]    NVARCHAR (<span style="color: #0000DD; font-weight: bold">50</span>) <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> CLUSTERED ([GenreID] <span style="color: #008800; font-weight: bold">ASC</span>)
+        );
+
+        <span style="color: #008800; font-weight: bold">CREATE</span> <span style="color: #008800; font-weight: bold">TABLE</span> [dbo].[Classification] (
+            [ClassificationID] <span style="color: #007020">INT</span> <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [ArtworkID]        <span style="color: #007020">INT</span> <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            [GenreID]       <span style="color: #007020">INT</span> <span style="color: #008800; font-weight: bold">NOT</span> <span style="color: #008800; font-weight: bold">NULL</span>,
+            <span style="color: #008800; font-weight: bold">PRIMARY</span> <span style="color: #008800; font-weight: bold">KEY</span> CLUSTERED ([ClassificationID] <span style="color: #008800; font-weight: bold">ASC</span>),
+            <span style="color: #008800; font-weight: bold">FOREIGN</span> <span style="color: #008800; font-weight: bold">KEY</span> ([ArtworkID]) <span style="color: #008800; font-weight: bold">REFERENCES</span> [dbo].[Artwork] ([ArtworkID])
+                <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">DELETE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>
+                <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">UPDATE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>,
+            <span style="color: #008800; font-weight: bold">FOREIGN</span> <span style="color: #008800; font-weight: bold">KEY</span> ([GenreID]) <span style="color: #008800; font-weight: bold">REFERENCES</span> [dbo].[Genre] ([GenreID])
+                <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">DELETE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>
+                <span style="color: #008800; font-weight: bold">ON</span> <span style="color: #008800; font-weight: bold">UPDATE</span> <span style="color: #008800; font-weight: bold">CASCADE</span>
+        );
+        </pre></div>
+
+        <p>It bears noting at this point that I ran into a few new lessons and complications after creating this database. Firstly, it turns out there are two very different ways to generate the date: DATE or DATETIME - the latter is actually not very good for storing dates in the past since it cannot store a date earlier than Jan 1, 1753. Secondly, it seemed all of my fellow students accomplished this lab without the need for Genre to have an ID property so there was a stint where I kept trying to modify it to be more like theres in the hope it would work - SPOILER ALERT: It didn't. Lastly, I learned that storing IDs and string literals is in no way helpful.</p>
+        
+        <h2>Seed Data</h2>
+        
+        <p>Next I created the required starting dataset for the database and put that, and the creat table code, into my markUp file.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">INSERT</span> <span style="color: #008800; font-weight: bold">INTO</span> Artist(ArtistID, Name, Birthdate, BirthCountry, BirthCity)
+        <span style="color: #008800; font-weight: bold">VALUES</span>
+            (<span style="color: #0000DD; font-weight: bold">1</span>, <span style="background-color: #fff0f0">&#39;M.C. Esher&#39;</span>, <span style="background-color: #fff0f0">&#39;07/17/1898&#39;</span>, <span style="background-color: #fff0f0">&#39;Netherlands&#39;</span>, <span style="background-color: #fff0f0">&#39;Leeuwarden&#39;</span>),
+            (<span style="color: #0000DD; font-weight: bold">2</span>, <span style="background-color: #fff0f0">&#39;Leonardo Da Vinci&#39;</span>, <span style="background-color: #fff0f0">&#39;05/02/1591&#39;</span>, <span style="background-color: #fff0f0">&#39;Italy&#39;</span>, <span style="background-color: #fff0f0">&#39;Vinci&#39;</span>),
+            (<span style="color: #0000DD; font-weight: bold">3</span>, <span style="background-color: #fff0f0">&#39;Hatip Mehmed Efendi&#39;</span>, <span style="background-color: #fff0f0">&#39;11/18/1680&#39;</span>, <span style="background-color: #fff0f0">&#39;Unknown&#39;</span>, <span style="background-color: #fff0f0">&#39;Unknown&#39;</span>),
+            (<span style="color: #0000DD; font-weight: bold">4</span>, <span style="background-color: #fff0f0">&#39;Salvador Dali&#39;</span>, <span style="background-color: #fff0f0">&#39;05/11/1904&#39;</span>, <span style="background-color: #fff0f0">&#39;Spain&#39;</span>, <span style="background-color: #fff0f0">&#39;Figueres&#39;</span>);
+
+        <span style="color: #008800; font-weight: bold">INSERT</span> <span style="color: #008800; font-weight: bold">INTO</span> Artwork(ArtworkID, ArtistID, Title)
+        <span style="color: #008800; font-weight: bold">VALUES</span>
+            (<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="background-color: #fff0f0">&#39;Circle Limit III&#39;</span>),
+            (<span style="color: #0000DD; font-weight: bold">2</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="background-color: #fff0f0">&#39;Twon Tree&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">3</span>, <span style="color: #0000DD; font-weight: bold">2</span>, <span style="background-color: #fff0f0">&#39;Mona Lisa&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">4</span>, <span style="color: #0000DD; font-weight: bold">2</span>, <span style="background-color: #fff0f0">&#39;The Vitruvian Man&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">3</span>, <span style="background-color: #fff0f0">&#39;Ebru&#39;</span>),
+            (<span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">4</span>, <span style="background-color: #fff0f0">&#39;Honey Is Sweeter Than Blood&#39;</span>);
+
+        <span style="color: #008800; font-weight: bold">INSERT</span> <span style="color: #008800; font-weight: bold">INTO</span> Genre(GenreID, Name)
+        <span style="color: #008800; font-weight: bold">VALUES</span>
+            (<span style="color: #0000DD; font-weight: bold">1</span>, <span style="background-color: #fff0f0">&#39;Tesselation&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">2</span>, <span style="background-color: #fff0f0">&#39;Surrealism&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">3</span>, <span style="background-color: #fff0f0">&#39;Portrait&#39;</span>), 
+            (<span style="color: #0000DD; font-weight: bold">4</span>, <span style="background-color: #fff0f0">&#39;Renaissance&#39;</span>);
+
+        <span style="color: #008800; font-weight: bold">INSERT</span> <span style="color: #008800; font-weight: bold">INTO</span> Classification(ClassificationID, ArtworkID, GenreID)
+        <span style="color: #008800; font-weight: bold">VALUES</span>
+            (<span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>, <span style="color: #0000DD; font-weight: bold">1</span>), 
+            (<span style="color: #0000DD; font-weight: bold">2</span>, <span style="color: #0000DD; font-weight: bold">2</span>, <span style="color: #0000DD; font-weight: bold">1</span>),
+            (<span style="color: #0000DD; font-weight: bold">3</span>, <span style="color: #0000DD; font-weight: bold">2</span>, <span style="color: #0000DD; font-weight: bold">2</span>), 
+            (<span style="color: #0000DD; font-weight: bold">4</span>, <span style="color: #0000DD; font-weight: bold">3</span>, <span style="color: #0000DD; font-weight: bold">3</span>), 
+            (<span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">3</span>, <span style="color: #0000DD; font-weight: bold">4</span>), 
+            (<span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">4</span>, <span style="color: #0000DD; font-weight: bold">4</span>), 
+            (<span style="color: #0000DD; font-weight: bold">7</span>, <span style="color: #0000DD; font-weight: bold">5</span>, <span style="color: #0000DD; font-weight: bold">1</span>), 
+            (<span style="color: #0000DD; font-weight: bold">8</span>, <span style="color: #0000DD; font-weight: bold">6</span>, <span style="color: #0000DD; font-weight: bold">2</span>);
+        </pre></div>
+
+        <h2>Auto Generation</h2>
+        
+        <p>Next, I created the Models using the ADO.net functionality for Code First implimentation. This created my necessary Model classes based off my newly minted database.</p>
+        
+        <p>Similiarly, I then used Scaffolding to auto generate my Views and Controller. In the begining it only provided me one List View (Artists) and then a Create, Delete, Detials and Index page.</p>
+        
+        <p>It is important to note you must build your project at least once before you can impliment the CRUD interface though. It also didn't give me the list view for the other Models as required - so I went in and auto generated a List View for each.</p>
+        
+        <p>I also had to remember to add the View methods to the Controller for the List Views since they were created after the fact.</p>
+        
+        <h2>Mid-Git</h2>
+        
+        <p>At this point we are required to stop and push to the branch. While not explicitly told to you at the start of this page, we are still on the "create a feature branch and work there" methodology for this project. To show we can effectively use Git, this is where we make sure to push at least once to the branch.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">git checkout -b HW8
+
+        git add HW8
+        git commit HW8 -m <span style="background-color: #fff0f0">&quot;Required Push for Assignment.&quot;</span>
+        git push origin HW8
+        </pre></div>
+        
+        <h2>A Few Constraints</h2>
+        
+        <p>We were asked to impliment two constaints for the data. The first was tht you could not set the birthday to any time in the future. The second was that the Artist's Name could not be longer than 50 letters. I accomplished this with the following code: </p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">            <span style="color: #008800; font-weight: bold">if</span> (artist.Name.Length <span style="color: #333333">&gt;</span> <span style="color: #0000DD; font-weight: bold">50</span>) {
+                ViewBag.Error2 <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;Name must be shorter than 50 characters.&quot;</span>;
+            }
+
+            <span style="color: #008800; font-weight: bold">if</span> (artist.Birthdate <span style="color: #333333">&gt;</span> DateTime.Now) {
+                ViewBag.<span style="color: #007020">Error</span> <span style="color: #333333">=</span> <span style="background-color: #fff0f0">&quot;Birthdate cannot be in the future.&quot;</span>;
+            }
+        </pre></div>
+
+        <h2>The REAL Battle Begins</h2>
+        
+        <img src="HW8/Content/Images/headdesk.gif">
+        
+        <p>The above is a picture of my mental state through the rest of this project. Our last task, daunting as it was, was to create buttons that called an AJAX script to show all Artworks and Artists affiliated with a specific Genre. </p>
+        
+        <p>As you might expecct, this is where it all fell apart. After days of struggling with the AJAX call, however, I finally cracked it's Da Vinci Code!</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">function</span> callFunction(selectedGenre) {
+            $(<span style="background-color: #fff0f0">&quot;#list&quot;</span>).empty();<span style="color: #888888">//Clear old data before ajax</span>
+
+            $.ajax({
+                url<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;/Home/GetGenre&quot;</span>,
+                type<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&quot;POST&quot;</span>,
+                data<span style="color: #333333">:</span> { genre <span style="color: #333333">:</span> selectedGenre },
+                success<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">function</span> (data) {
+                    console.log(data);
+                    data.arr.forEach(<span style="color: #008800; font-weight: bold">function</span> (item) {
+                        $(<span style="background-color: #fff0f0">&#39;#list&#39;</span>).append(item);
+                    });
+                },
+                error<span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">function</span> () {
+                    alert(<span style="background-color: #fff0f0">&#39;There was an error.&#39;</span>);
+                }
+            });
+        }
+        </pre></div>
+
+        <p>Issue? It would go into the controller and get hung up on the SQL return commands I created. Frustratingly, these same commands returned exactly what I wanted when run in LINQ pad but failed to do so due to some error about anonymous calls in Visual Studio.</p>
+        
+        <h2>The Hang Up</h2>
+        
+        <p>Sadly, this is where I stay stuck again. Almost every student I tried to get help from had gone to pain staking lengths NOT to use JSON as a way to return their data since they hated JSON so much. This meant they weren't really able to help me get on track - and using their complicated methods with multiple ViewModels and such seemed like a great way to confuse myself further so I didn't pursue that option. Instead, I've tried everything to make the following code work and unless my instructor pops up with a miracle answer by tonight... this is where I had to call it quits since its due tomorrow and I still have to deploy to Azure for Homework 9.</p>
+        
+        <!--Code Snippet-->
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">        [HttpPost]
+        <span style="color: #008800; font-weight: bold">public</span> JsonResult GetGenre(<span style="color: #008800; font-weight: bold">int</span><span style="color: #333333">?</span> genre)
+        {
+            <span style="color: #008800; font-weight: bold">var</span> artwork <span style="color: #333333">=</span> db.Genres.FirstOrDefault(n <span style="color: #333333">=&gt;</span> n.GenreID <span style="color: #333333">==</span> genre).Classifications.ToList().OrderBy(t <span style="color: #333333">=&gt;</span> t.Artwork.Title).Select(a <span style="color: #333333">=&gt;</span> <span style="color: #008800; font-weight: bold">new</span> { aw <span style="color: #333333">=</span> a.ArtworkID, awa <span style="color: #333333">=</span> a.Artwork.ArtistID }).ToList();
+            string[] artworkArtist <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> string[artwork.Count()];
+            <span style="color: #008800; font-weight: bold">for</span> (<span style="color: #008800; font-weight: bold">int</span> i <span style="color: #333333">=</span> <span style="color: #0000DD; font-weight: bold">0</span>; i <span style="color: #333333">&lt;</span> artworkArtist.Length; <span style="color: #333333">++</span>i)
+            {
+                <span style="color: #008800; font-weight: bold">var</span> artistName <span style="color: #333333">=</span> db.Artists.Where(awa <span style="color: #333333">=&gt;</span> awa.ArtistID <span style="color: #333333">==</span> artwork[i].awa).Select(a <span style="color: #333333">=&gt;</span> a.Name).ToList();
+                <span style="color: #008800; font-weight: bold">var</span> artworkName <span style="color: #333333">=</span> db.Artworks.Where(aw <span style="color: #333333">=&gt;</span> aw.ArtworkID <span style="color: #333333">==</span> artwork[i].aw).Select(a <span style="color: #333333">=&gt;</span> a.Title).ToList();
+                artworkArtist[i] <span style="color: #333333">=</span> $<span style="background-color: #fff0f0">&quot;&lt;td&gt;{artworkName}&lt;/td&gt;&lt;td&gt;{artistName}&lt;/td&gt;&quot;</span>;
+            }
+            <span style="color: #008800; font-weight: bold">var</span> data <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span>
+            {
+                arr <span style="color: #333333">=</span> artworkArtist
+            };
+            <span style="color: #008800; font-weight: bold">return</span> Json(data, JsonRequestBehavior.AllowGet);
+                    }
+            </pre></div>
+
+        <h2>In Operation</h2>
+        
+        <p>Here are some screenshots of the site in operation - natually sans the button functionality.</p>
+        
+        <!--Screen Shots-->
+        <img src="HW8/Content/Images/ss_homeIndex.PNG"> <br>
+        <img src="HW8/Content/Images/ss_artistsIndex.PNG"> <br>
+        <img src="HW8/Content/Images/ss_artworkIndex.PNG"> <br>
+        <img src="HW8/Content/Images/ss_classIndex.PNG"> <br>
+        <img src="HW8/Content/Images/ss_artistsBirthdateFunc.PNG"> <br>
+    </div>
+</div>
+</body>
+</html>
