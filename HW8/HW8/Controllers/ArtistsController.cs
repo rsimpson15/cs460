@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HW8.Models;
+using System.Diagnostics;
 
 namespace HW8.Controllers
 {
@@ -25,16 +26,20 @@ namespace HW8.Controllers
         [HttpPost]
         public JsonResult GetGenre(int? genre)
         {
+            Debug.WriteLine(genre);
             var artwork = db.Genres.FirstOrDefault(n => n.GenreID == genre).Classifications.ToList().OrderBy(t => t.Artwork.Title).Select(a => new { aw = a.ArtworkID, awa = a.Artwork.ArtistID }).ToList();
             string[] artworkArtist = new string[artwork.Count()];
             for (int i = 0; i < artworkArtist.Length; ++i)
             {
-                artworkArtist[i] = $"<td>{db.Artworks.Where(aw => aw.ArtworkID == artwork[i].aw).Select(a => a.Title).ToList()}</td><td>{db.Artists.Where(awa => awa.ArtistID == artwork[i].awa).Select(a => a.Name).ToList()}</td>";
+                var artistName = db.Artists.Where(awa => awa.ArtistID == artwork[i].awa).Select(a => a.Name).ToList();
+                var artworkName = db.Artworks.Where(aw => aw.ArtworkID == artwork[i].aw).Select(a => a.Title).ToList();
+                artworkArtist[i] = $"<td>{artworkName}</td><td>{artistName}</td>";
             }
             var data = new
             {
                 arr = artworkArtist
             };
+            Debug.WriteLine(data);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
