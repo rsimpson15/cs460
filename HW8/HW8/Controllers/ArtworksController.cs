@@ -7,120 +7,115 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HW8.Models;
-using System.Diagnostics;
 
 namespace HW8.Controllers
 {
-    public class ArtistsController : Controller
+    public class ArtworksController : Controller
     {
         private ArtGallery db = new ArtGallery();
 
-        // GET: Artists
+        // GET: Artworks
         public ActionResult Index()
         {
-            return View(db.Artists.ToList());
+            var artworks = db.Artworks.Include(a => a.Artist);
+            return View(artworks.ToList());
         }
 
-        // GET: Artists/Details/5
+        // GET: Artworks/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Artwork artwork = db.Artworks.Find(id);
+            if (artwork == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            return View(artwork);
         }
 
-        // GET: Artists/Create
+        // GET: Artworks/Create
         public ActionResult Create()
         {
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name");
             return View();
         }
 
-        // POST: Artists/Create
+        // POST: Artworks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtistID,Name,Birthdate,BirthCountry,BirthCity")] Artist artist)
+        public ActionResult Create([Bind(Include = "ArtworkID,ArtistID,Title")] Artwork artwork)
         {
-
-            if (artist.Name.Length > 50) {
-                ViewBag.Error2 = "Name must be shorter than 50 characters.";
-            }
-
-            if (artist.Birthdate > DateTime.Now) {
-                ViewBag.Error = "Birthdate cannot be in the future.";
-            }
-
             if (ModelState.IsValid)
             {
-                db.Artists.Add(artist);
+                db.Artworks.Add(artwork);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(artist);
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", artwork.ArtistID);
+            return View(artwork);
         }
 
-        // GET: Artists/Edit/5
+        // GET: Artworks/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Artwork artwork = db.Artworks.Find(id);
+            if (artwork == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", artwork.ArtistID);
+            return View(artwork);
         }
 
-        // POST: Artists/Edit/5
+        // POST: Artworks/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistID,Name,Birthdate,BirthCountry,BirthCity")] Artist artist)
+        public ActionResult Edit([Bind(Include = "ArtworkID,ArtistID,Title")] Artwork artwork)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artist).State = EntityState.Modified;
+                db.Entry(artwork).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(artist);
+            ViewBag.ArtistID = new SelectList(db.Artists, "ArtistID", "Name", artwork.ArtistID);
+            return View(artwork);
         }
 
-        // GET: Artists/Delete/5
+        // GET: Artworks/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
-            if (artist == null)
+            Artwork artwork = db.Artworks.Find(id);
+            if (artwork == null)
             {
                 return HttpNotFound();
             }
-            return View(artist);
+            return View(artwork);
         }
 
-        // POST: Artists/Delete/5
+        // POST: Artworks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Artist artist = db.Artists.Find(id);
-            db.Artists.Remove(artist);
+            Artwork artwork = db.Artworks.Find(id);
+            db.Artworks.Remove(artwork);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

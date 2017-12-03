@@ -2,7 +2,7 @@
     $("#list").empty();//Clear old data before ajax
 
     $.ajax({
-        url: "/Artists/GetGenre",
+        url: "/Home/GetGenre",
         type: "POST",
         data: { genre : selectedGenre },
         success: function (data) {

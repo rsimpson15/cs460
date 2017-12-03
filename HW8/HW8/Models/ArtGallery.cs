@@ -19,6 +19,7 @@ namespace HW8.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
         }
     }
 }
